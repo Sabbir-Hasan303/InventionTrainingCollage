@@ -8,13 +8,25 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function CTA() {
     const ctaRef = useRef(null)
+    const bgRef = useRef(null)
+    const leftRef = useRef(null)
+    const formRef = useRef(null)
 
     useEffect(() => {
         if (!ctaRef.current) return
 
         const ctx = gsap.context(() => {
+            ScrollTrigger.create({
+                trigger: ctaRef.current,
+                start: 'top top',
+                end: 'bottom top',
+                pin: bgRef.current,
+                pinSpacing: false,
+                anticipatePin: 1,
+            })
+
             gsap.fromTo(
-                '.cta-left',
+                leftRef.current,
                 { opacity: 0, y: 40 },
                 {
                     opacity: 1,
@@ -29,7 +41,7 @@ export default function CTA() {
             )
 
             gsap.fromTo(
-                '.cta-form',
+                formRef.current,
                 { opacity: 0, y: 42 },
                 {
                     opacity: 1,
@@ -50,17 +62,22 @@ export default function CTA() {
 
     return (
         <section ref={ctaRef} className="relative isolate overflow-hidden py-24 sm:py-28">
-            <div
-                className="absolute inset-0 z-0 bg-fixed bg-cover bg-center"
-                style={{
-                    backgroundImage:
-                        'linear-gradient(90deg, rgba(9,15,24,0.86) 0%, rgba(9,15,24,0.66) 52%, rgba(9,15,24,0.48) 100%), linear-gradient(0deg, rgba(4,8,14,0.42), rgba(4,8,14,0.42)), url(https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=2200&q=80)',
-                }}
-            />
+            <div className="absolute inset-0 z-0 overflow-hidden">
+                <div ref={bgRef} className="relative h-full w-full">
+                    <img
+                        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2200&q=80"
+                        alt=""
+                        aria-hidden="true"
+                        className="h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,15,24,0.68)_0%,rgba(9,15,24,0.46)_52%,rgba(9,15,24,0.34)_100%)]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(4,8,14,0.26),rgba(4,8,14,0.26))]" />
+                </div>
+            </div>
 
             <div className="web-giant-container relative z-10">
                 <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.35fr_540px] lg:gap-12">
-                    <div className="cta-left max-w-3xl">
+                    <div ref={leftRef} className="max-w-3xl">
                         <h2 className="mb-4 text-4xl font-bold leading-[1.08] text-white sm:text-5xl">
                             Ready to Start Your Journey?
                         </h2>
@@ -74,7 +91,7 @@ export default function CTA() {
                         </a>
                     </div>
 
-                    <div className="cta-form w-full lg:justify-self-end">
+                    <div ref={formRef} className="w-full lg:justify-self-end">
                         <EnquiryForm variant="standalone" />
                     </div>
                 </div>

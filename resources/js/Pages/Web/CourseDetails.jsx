@@ -131,8 +131,9 @@ export default function CourseDetails({ slug = null, legacyId = null }) {
                     className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url(${course.image})` }}
                 />
-                <div className="absolute inset-0 bg-[#0c1016]/78" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0b1119]/84 via-[#0b1119]/66 to-[#0b1119]/56" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#090a0d]/90 via-[#090a0d]/58 to-[#090a0d]/78" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(215,181,90,0.22),transparent_45%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_80%,rgba(94,196,184,0.18),transparent_46%)]" />
 
                 <div className="web-giant-container relative z-10">
                     <Link href="/courses" className="mb-6 inline-flex text-xs font-semibold uppercase tracking-[0.14em] text-[#f4d186]">
