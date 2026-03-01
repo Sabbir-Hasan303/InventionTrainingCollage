@@ -19,7 +19,25 @@ Route::get('/about', function () {
 });
 
 Route::get('/courses', function () {
-    return Inertia::render('Web/ComingSoon');
+    return Inertia::render('Web/Courses');
+});
+
+Route::get('/courses/{slug}', function (string $slug) {
+    return Inertia::render('Web/CourseDetails', [
+        'slug' => $slug,
+    ]);
+});
+
+Route::get('/course/{id}', function (string $id) {
+    return Inertia::render('Web/CourseDetails', [
+        'legacyId' => $id,
+    ]);
+});
+
+Route::get('/category/{category}', function (string $category) {
+    return Inertia::render('Web/Courses', [
+        'category' => $category,
+    ]);
 });
 
 Route::get('/students', function () {
