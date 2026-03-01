@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Link, usePage } from '@inertiajs/react'
+import { Head, Link, usePage } from '@inertiajs/react'
 import {
     AlertTriangle,
     BookOpen,
@@ -98,9 +98,12 @@ export default function CourseDetails({ slug = null, legacyId = null }) {
         return null
     }, [fallbackSlug, legacyId, slug])
 
+    const pageTitle = course?.title || slug || fallbackSlug || 'Course Details'
+
     if (!course) {
         return (
             <WebLayout>
+                <Head title={pageTitle} />
                 <section className="bg-light py-36">
                     <div className="web-giant-container">
                         <div className="mx-auto max-w-2xl rounded-2xl border border-[#1d1f22]/12 bg-white p-10 text-center shadow-[0_12px_30px_rgba(0,0,0,0.08)]">
@@ -122,6 +125,7 @@ export default function CourseDetails({ slug = null, legacyId = null }) {
 
     return (
         <WebLayout>
+            <Head title={pageTitle} />
             <section className="relative overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-36">
                 <div
                     className="absolute inset-0 bg-cover bg-center"
