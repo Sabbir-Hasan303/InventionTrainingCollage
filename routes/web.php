@@ -15,41 +15,19 @@ Route::get('/', function () {
 });
 
 Route::get('/about', function () {
-    return Inertia::render('Web/About');
+    return Inertia::render('Web/ComingSoon');
 });
 
-Route::get('/plots', function () {
-    return Inertia::render('Web/Plots');
+Route::get('/courses', function () {
+    return Inertia::render('Web/ComingSoon');
 });
 
-Route::get('/gallery', function () {
-    return Inertia::render('Web/Gallery');
-});
-
-Route::get('/pricing', function () {
-    return Inertia::render('Web/Pricing');
-});
-
-Route::get('/projects', function () {
-    return Inertia::render('Web/Projects');
-});
-
-Route::get('/projects/{slug}', function (string $slug) {
-    return Inertia::render('Web/ProjectDetails', [
-        'slug' => $slug,
-    ]);
+Route::get('/students', function () {
+    return Inertia::render('Web/ComingSoon');
 });
 
 Route::get('/contact', function () {
-    return Inertia::render('Web/Contact');
-});
-
-Route::get('/landowner', function () {
-    return Inertia::render('Web/Landowner');
-});
-
-Route::get('/animation', function () {
-    return Inertia::render('Web/Animation');
+    return Inertia::render('Web/ComingSoon');
 });
 
 // Route::middleware('auth')->group(function () {
