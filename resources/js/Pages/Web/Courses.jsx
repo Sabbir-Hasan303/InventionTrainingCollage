@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Link } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 import WebLayout from '@/Layouts/WebLayout'
 import MenuDropdown from '@/Components/others_animation/MenuDropdown'
 import { categories, courses } from '@/Data/courses'
@@ -148,6 +148,7 @@ export default function Courses({ category = null }) {
 
     return (
         <WebLayout>
+            <Head title="Courses" />
             <section className="relative overflow-hidden bg-[#111318] pb-20 pt-36 sm:pb-24 sm:pt-40">
                 <div className="pointer-events-none absolute inset-0">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_14%,rgba(215,181,90,0.22),transparent_42%)]" />

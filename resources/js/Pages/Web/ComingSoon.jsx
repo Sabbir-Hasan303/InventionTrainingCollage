@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 import { ArrowRight, Clock3, Wrench } from 'lucide-react'
 import WebLayout from '@/Layouts/WebLayout'
 
@@ -9,6 +9,7 @@ export default function ComingSoon({
 }) {
     return (
         <WebLayout>
+            <Head title="Comming Soon" />
             <section className="relative isolate overflow-hidden bg-dark py-28 sm:py-32">
                 <div className="pointer-events-none absolute inset-0">
                     <div className="absolute -left-24 top-0 h-80 w-80 rounded-full bg-[#d7b55a]/16 blur-3xl" />
