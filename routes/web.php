@@ -15,7 +15,7 @@ Route::get('/', function () {
 });
 
 Route::get('/about', function () {
-    return Inertia::render('Web/ComingSoon');
+    return Inertia::render('Web/About');
 });
 
 Route::get('/courses', function () {
@@ -45,7 +45,7 @@ Route::get('/students', function () {
 });
 
 Route::get('/contact', function () {
-    return Inertia::render('Web/ComingSoon');
+    return Inertia::render('Web/Contact');
 });
 
 // Route::middleware('auth')->group(function () {
