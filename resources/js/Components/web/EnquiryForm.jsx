@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/Components/ui/input'
+import { Textarea } from '@/Components/ui/textarea'
 import { CheckCircle2, Send } from 'lucide-react'
 import MenuDropdown from '@/Components/others_animation/MenuDropdown'
 
