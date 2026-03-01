@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
   { label: "Home", path: "/" },
+  { label: "About", path: "/about" },
   {
     label: "Courses",
     path: "/courses",
@@ -17,8 +18,6 @@ const navItems = [
     ],
   },
   { label: "Students", path: "/students" },
-  { label: "About", path: "/about" },
-  { label: "FAQs", path: "/faqs" },
   { label: "Contact", path: "/contact" },
 ];
 
@@ -69,7 +68,7 @@ export default function Navbar() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          showBackground ? "bg-[#161719]/95 backdrop-blur-md shadow-2xl border-b border-white/10" : "bg-transparent"
+          showBackground ? "bg-[#161719]/95 backdrop-blur-md shadow-2xl" : "bg-transparent"
         }`}
         onMouseLeave={() => {
           setDesktopDropdownOpen(null);

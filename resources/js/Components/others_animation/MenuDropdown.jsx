@@ -397,7 +397,7 @@ export default function MenuDropdown({
           onClick={toggleMenu}
           onKeyDown={onTriggerKeyDown}
           className={cn(
-            "relative w-full border text-left font-medium shadow-[0_1px_1px_-0.5px_rgba(15,23,42,0.05),0_2px_2px_-1px_rgba(15,23,42,0.06),0_5px_5px_-2px_rgba(15,23,42,0.06)] transition duration-300",
+            "relative w-full border text-left font-medium shadow-[0_1px_1px_-0.5px_rgba(15,23,42,0.05),0_2px_2px_-1px_rgba(15,23,42,0.06),0_5px_5px_-2px_rgba(15,23,42,0.06)] transition duration-200",
             sizeStyles.trigger,
             colorStyles.triggerFrame,
             selectedOption ? colorStyles.triggerText : colorStyles.triggerPlaceholder,
@@ -420,7 +420,7 @@ export default function MenuDropdown({
 
           <ChevronIcon
             className={cn(
-              "absolute top-1/2 -translate-y-1/2 transition-transform duration-300",
+              "absolute top-1/2 -translate-y-1/2 transition-transform duration-200",
               sizeStyles.chevron,
               colorStyles.chevron,
               isOpen && "rotate-180"
@@ -433,7 +433,7 @@ export default function MenuDropdown({
           role="menu"
           aria-hidden={!isOpen}
           className={cn(
-            "absolute left-0 z-20 m-0 flex w-full origin-top flex-col gap-1 border p-0 shadow-[0_1px_1px_-0.5px_rgba(15,23,42,0.05),0_2px_2px_-1px_rgba(15,23,42,0.06),0_10px_12px_-4px_rgba(15,23,42,0.08),0_24px_28px_-10px_rgba(15,23,42,0.09)] transition-all duration-500 ease-[cubic-bezier(0.66,0,0.34,1)]",
+            "absolute left-0 z-20 m-0 flex w-full origin-top flex-col gap-1 border p-0 shadow-[0_1px_1px_-0.5px_rgba(15,23,42,0.05),0_2px_2px_-1px_rgba(15,23,42,0.06),0_10px_12px_-4px_rgba(15,23,42,0.08),0_24px_28px_-10px_rgba(15,23,42,0.09)] transition-all duration-220 ease-[cubic-bezier(0.66,0,0.34,1)]",
             sizeStyles.menu,
             colorStyles.menuFrame,
             isOpen
@@ -461,7 +461,7 @@ export default function MenuDropdown({
                   onClick={() => chooseOption(option.value)}
                   onKeyDown={(event) => onOptionKeyDown(event, index)}
                   className={cn(
-                    "grid w-full text-left transition-all duration-500 ease-[cubic-bezier(0.66,0,0.34,1)]",
+                    "grid w-full text-left transition-all duration-220 ease-[cubic-bezier(0.66,0,0.34,1)]",
                     sizeStyles.option,
                     iconAndDescription
                       ? sizeStyles.optionGridWithIconAndDescription
@@ -475,7 +475,7 @@ export default function MenuDropdown({
                     isSelected && selectedOptionClassName
                   )}
                   style={{
-                    transitionDelay: isOpen ? `${(index + 1) * 50}ms` : "0ms",
+                    transitionDelay: isOpen ? `${(index + 1) * 22}ms` : "0ms",
                   }}
                 >
                   {hasIcon ? (
