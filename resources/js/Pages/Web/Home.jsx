@@ -17,6 +17,7 @@ import AboutCtaSection from '@/Components/web/About/AboutCtaSection';
 import HomeHero from '@/Components/web/Home/Hero';
 import Categories from '@/Components/web/Home/Categories';
 import WhyChoose from '@/Components/web/Home/WhyChoose';
+import AllCourses from '@/Components/web/Home/AllCourses';
 
 export default function Home() {
     return (
@@ -24,6 +25,7 @@ export default function Home() {
             <HomeHero />
             <Categories />
             <WhyChoose />
+            <AllCourses />
         </WebLayout>
     )
 }
