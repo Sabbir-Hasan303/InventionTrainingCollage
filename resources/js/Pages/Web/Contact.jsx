@@ -1,341 +1,233 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Send, Check } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TextField } from '@mui/material';
-import WebLayout from '@/Layouts/WebLayout';
+import React, { useEffect, useRef } from 'react'
+import { Head } from '@inertiajs/react'
+import { Clock3, Mail, MapPin, Phone } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import WebLayout from '@/Layouts/WebLayout'
+import EnquiryForm from '@/Components/web/EnquiryForm'
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger)
+
+const contactItems = [
+    {
+        icon: Phone,
+        title: 'Call Us',
+        value: '(02) 0000 0000',
+        note: 'Monday to Friday, 9:00 AM - 5:00 PM',
+        href: 'tel:+61200000000',
+    },
+    {
+        icon: Mail,
+        title: 'Email',
+        value: 'info@inventiontraining.edu.au',
+        note: 'We usually respond within one business day',
+        href: 'mailto:info@inventiontraining.edu.au',
+    },
+    {
+        icon: MapPin,
+        title: 'Visit Us',
+        value: '1/40 Raymond Street, Bankstown NSW 2200',
+        note: 'Invention Training College Pty Ltd | RTO Code: 46008',
+        href: 'https://maps.google.com/?q=1/40+Raymond+Street+Bankstown+NSW+2200',
+    },
+]
+
+const enquiryHighlights = [
+    'Course suitability and entry requirements',
+    'Delivery and assessment arrangements',
+    'Fees, payment terms, and available support services',
+]
 
 export default function Contact() {
-    const fieldSx = {
-        '& .MuiOutlinedInput-root': {
-            minHeight: 58,
-            borderRadius: '0.9rem',
-            backgroundColor: 'rgba(255,255,255,0.82)',
-            color: '#1A1A1A',
-            boxShadow: 'inset 0 1px 1px rgba(10,10,10,0.04)',
-            '& fieldset': { borderColor: 'rgba(20,20,20,0.14)' },
-            '&:hover fieldset': { borderColor: 'rgba(47,168,157,0.65)' },
-            '&.Mui-focused fieldset': { borderColor: '#2FA89D', borderWidth: '1px' },
-        },
-        '& .MuiInputBase-input': {
-            fontSize: '0.98rem',
-        },
-        '& .MuiInputLabel-root': { color: 'rgba(26,26,26,0.7)', fontSize: '0.96rem' },
-        '& .MuiInputLabel-root.Mui-focused': { color: '#2FA89D' },
-    };
-
-    const [formData, setFormData] = useState({
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone: '',
-        message: ''
-    });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const heroRef = useRef(null);
-    const bgRef = useRef(null);
+    const pageRef = useRef(null)
 
     useEffect(() => {
-        let heroTween;
+        if (!pageRef.current) return undefined
 
-        if (heroRef.current && bgRef.current) {
-            heroTween = gsap.to(bgRef.current, {
-                scrollTrigger: {
-                    trigger: heroRef.current,
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: true
-                },
-                yPercent: 30
-            });
-        }
+        const ctx = gsap.context(() => {
+            gsap.utils.toArray('[data-contact-reveal]').forEach((item) => {
+                gsap.fromTo(
+                    item,
+                    { autoAlpha: 0, y: 36 },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.85,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: item,
+                            start: 'top 84%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    }
+                )
+            })
 
-        return () => {
-            heroTween?.scrollTrigger?.kill();
-            heroTween?.kill();
-        };
-    }, []);
+            gsap.utils.toArray('[data-contact-parallax]').forEach((item) => {
+                gsap.fromTo(
+                    item,
+                    { yPercent: -8, scale: 1.06 },
+                    {
+                        yPercent: 10,
+                        scale: 1.12,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: item,
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: true,
+                        },
+                    }
+                )
+            })
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
+            ScrollTrigger.refresh()
+        }, pageRef)
 
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        setFormData({
-            first_name: '',
-            last_name: '',
-            email: '',
-            phone: '',
-            message: ''
-        });
-    };
-
-    const contactInfo = [
-        {
-            icon: MapPin,
-            title: 'Office Address',
-            content: 'Dhaka, Bangladesh',
-            link: 'https://maps.google.com/?q=Dhaka,Bangladesh'
-        },
-        {
-            icon: Phone,
-            title: 'Phone',
-            content: '+880 1742 122765',
-            link: 'tel:+8801742122765'
-        },
-        {
-            icon: Mail,
-            title: 'Email',
-            content: 'nexthomeproperties2030@gmail.com',
-            link: 'mailto:nexthomeproperties2030@gmail.com'
-        },
-        {
-            icon: Clock,
-            title: 'Working Hours',
-            content: 'Saturday - Thursday',
-            subtitle: '9:00 AM - 6:00 PM'
-        },
-    ];
+        return () => ctx.revert()
+    }, [])
 
     return (
         <WebLayout>
-            {/* Hero Section with Parallax */}
-            <section ref={heroRef} className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-                <div ref={bgRef} className="absolute inset-0 w-full h-[120%]">
+            <Head title="Contact Us" />
+
+            <div ref={pageRef}>
+                <section className="relative isolate min-h-[72vh] overflow-hidden pt-28 sm:pt-32">
                     <img
-                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
-                        alt="Contact"
-                        className="w-full h-full object-cover"
+                        data-contact-parallax
+                        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2200&q=80"
+                        alt="Students discussing learning pathways"
+                        className="absolute inset-0 h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-[#0A0A0A]" />
-                </div>
+                    <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(8,12,20,0.9)_18%,rgba(8,12,20,0.56)_56%,rgba(8,12,20,0.8)_100%)]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_14%,rgba(215,181,90,0.26),transparent_40%)]" />
 
-                <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <span className="inline-block text-[#4ECDC4] text-sm tracking-[0.4em] uppercase mb-6 font-light">
-                            GET IN TOUCH
-                        </span>
-                        <h1 className="text-5xl md:text-7xl font-light text-white mb-6 leading-tight">
-                            Let's Start Your<br />Investment Journey
-                        </h1>
-                        <p className="text-xl text-white/70 max-w-2xl mx-auto">
-                            Our team is ready to guide you toward smart property decisions
-                        </p>
-                    </motion.div>
-                </div>
-            </section>
+                    <div className="web-giant-container relative z-10 flex min-h-[72vh] items-end pb-14 sm:pb-20">
+                        <div data-contact-reveal className="max-w-4xl">
+                            <span className="mb-5 inline-flex rounded-full border border-[#d7b55a]/55 bg-[#d7b55a]/12 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#f7dda0]">
+                                Contact Us
+                            </span>
+                            <h1 className="mb-4 text-4xl font-bold leading-[1.05] text-white sm:text-5xl lg:text-6xl">
+                                Let&apos;s Plan Your Training Pathway
+                            </h1>
+                            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-white/85 sm:text-base">
+                                Invention Training College Pty Ltd | RTO Code: 46008
+                            </p>
+                            <p className="max-w-3xl text-sm leading-relaxed text-white/75 sm:text-base">
+                                Contact our team to discuss course options, enrolment requirements, delivery modes, and
+                                student support services. We are here to help you choose the right qualification for
+                                your goals.
+                            </p>
+                        </div>
+                    </div>
+                </section>
 
-            {/* Contact Form + Map */}
-            <section className="py-24 bg-light">
-                <div className="max-w-7xl mx-auto px-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-16"
-                    >
-                        <span className="text-[#2FA89D] text-sm tracking-[0.3em] uppercase font-light">
-                            SEND US A MESSAGE
-                        </span>
-                        <h2 className="text-4xl md:text-5xl font-light text-[#1A1A1A] mt-6 mb-4">
-                            We're Here to Help
-                        </h2>
-                        <p className="text-[#1A1A1A]/70 text-lg max-w-2xl mx-auto">
-                            Fill out the form below and our team will get back to you within 24 hours
-                        </p>
-                    </motion.div>
-
-                    <div className="grid xl:grid-cols-2 gap-8">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="bg-[linear-gradient(180deg,#ffffff_0%,#f7f5ef_100%)] rounded-[28px] p-8 md:p-10 border border-[#0A0A0A]/10 shadow-[0_18px_48px_rgba(17,24,39,0.08)]"
-                        >
-                            {isSubmitted ? (
-                                <div className="text-center py-16">
-                                    <div className="w-24 h-24 mx-auto bg-[#4ECDC4]/10 rounded-full flex items-center justify-center mb-8">
-                                        <Check className="w-12 h-12 text-[#2FA89D]" />
-                                    </div>
-                                    <h3 className="text-3xl font-light text-[#1A1A1A] mb-4">Message Sent!</h3>
-                                    <p className="text-[#1A1A1A]/70 text-lg mb-10">
-                                        Thank you for reaching out. We'll get back to you within 24 hours.
-                                    </p>
-                                    <button
-                                        onClick={() => setIsSubmitted(false)}
-                                        className="px-8 py-4 bg-[#4ECDC4] text-black rounded-full hover:bg-[#3db8ad] transition-all font-medium"
+                <section className="relative z-30 bg-light py-14 sm:py-16">
+                    <div className="web-giant-container">
+                        <div className="mb-10 grid grid-cols-1 divide-y divide-[#1d1f22]/12 border-y border-[#1d1f22]/12 md:grid-cols-3 md:divide-x md:divide-y-0">
+                            {contactItems.map((item) => {
+                                const Icon = item.icon
+                                return (
+                                    <a
+                                        key={item.title}
+                                        href={item.href}
+                                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                                        rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
+                                        data-contact-reveal
+                                        className="group px-2 py-5 transition-colors duration-300 hover:bg-[#1d1f22]/[0.025] md:px-5"
                                     >
-                                        Send Another Message
-                                    </button>
-                                </div>
-                            ) : (
-                                <form onSubmit={handleSubmit}>
-                                    <div className="mb-8">
-                                        <p className="text-[11px] tracking-[0.25em] uppercase text-[#2FA89D] mb-2">Contact Form</p>
-                                        <p className="text-[#1A1A1A]/70 text-sm">Share a few details and our team will reach out shortly.</p>
-                                    </div>
-
-                                    <div className="grid md:grid-cols-2 gap-5 mb-5">
-                                        <div>
-                                            <TextField
-                                                id="first_name"
-                                                label="First Name"
-                                                fullWidth
-                                                value={formData.first_name}
-                                                onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
-                                                placeholder="John"
-                                                required
-                                                sx={fieldSx}
-                                            />
-                                        </div>
-                                        <div>
-                                            <TextField
-                                                id="last_name"
-                                                label="Last Name"
-                                                fullWidth
-                                                value={formData.last_name}
-                                                onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
-                                                placeholder="Doe"
-                                                required
-                                                sx={fieldSx}
-                                            />
-                                        </div>
-                                        <div>
-                                            <TextField
-                                                id="email"
-                                                label="Email Address"
-                                                type="email"
-                                                fullWidth
-                                                value={formData.email}
-                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                placeholder="john@example.com"
-                                                required
-                                                sx={fieldSx}
-                                            />
-                                        </div>
-                                        <div>
-                                            <TextField
-                                                id="phone"
-                                                label="Phone Number"
-                                                fullWidth
-                                                value={formData.phone}
-                                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                                placeholder="+880 1234 567890"
-                                                sx={fieldSx}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="mb-8 w-full">
-                                        <TextField
-                                            id="message"
-                                            label="Message"
-                                            fullWidth
-                                            multiline
-                                            rows={6}
-                                            value={formData.message}
-                                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                            placeholder="Tell us about your requirements..."
-                                            required
-                                            sx={fieldSx}
-                                        />
-                                    </div>
-
-                                    <div className="flex items-center justify-between gap-4 flex-wrap">
-                                        <p className="text-xs text-[#1A1A1A]/55">Usually replies within 24 hours.</p>
-                                        <button
-                                            type="submit"
-                                            disabled={isSubmitting}
-                                            className="min-w-[210px] px-8 py-3.5 bg-[#1A1A1A] text-white rounded-full hover:bg-[#000000] transition-all font-medium text-base flex items-center justify-center gap-3 disabled:opacity-50 shadow-[0_10px_26px_rgba(0,0,0,0.16)]"
-                                        >
-                                            {isSubmitting ? 'Sending...' : 'Send Message'}
-                                            <span className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
-                                                <Send className="w-4 h-4" />
+                                        <div className="flex items-start gap-3">
+                                            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#1d1f22] text-white transition-colors duration-300 group-hover:bg-[#d7b55a] group-hover:text-[#1d1f22]">
+                                                <Icon className="h-4 w-4" />
                                             </span>
-                                        </button>
-                                    </div>
-                                </form>
-                            )}
-                        </motion.div>
+                                            <div>
+                                                <h2 className="mb-0.5 text-xl font-bold text-[#1d1f22]">{item.title}</h2>
+                                                <p className="mb-1.5 text-sm font-semibold text-[#32363d]">{item.value}</p>
+                                                <p className="text-xs text-[#636973]">{item.note}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                )
+                            })}
+                        </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="bg-white rounded-3xl border border-[#0A0A0A]/10 p-3 shadow-sm"
-                        >
+                        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_520px] lg:items-stretch">
+                            <div className="flex h-full flex-col justify-center">
+                                <div data-contact-reveal className="pb-6">
+                                    <div className="mb-6 flex items-center gap-3">
+                                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#d7b55a] text-[#1d1f22]">
+                                            <Clock3 className="h-5 w-5" />
+                                        </span>
+                                        <div>
+                                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8a6b1f]">
+                                                Office Hours
+                                            </p>
+                                            <p className="text-sm text-[#3e4550]">Monday to Friday, 9:00 AM - 5:00 PM</p>
+                                        </div>
+                                    </div>
+
+                                    <h2 className="mb-4 text-3xl font-bold leading-tight text-[#111827] sm:text-[2.1rem]">
+                                        Speak with Our Team
+                                    </h2>
+                                    <p className="mb-4 text-sm leading-relaxed text-[#3f4650] sm:text-base">
+                                        We provide information on course suitability, entry requirements, delivery and
+                                        assessment arrangements, fees, and support services prior to enrolment.
+                                    </p>
+                                    <p className="text-sm leading-relaxed text-[#4c5562] sm:text-base">
+                                        Detailed student information is available in the Student Handbook and on individual
+                                        course pages.
+                                    </p>
+                                </div>
+
+                                <div data-contact-reveal className="border-t border-[#1d1f22]/12 pt-5">
+                                    <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8a6b1f]">
+                                        Before You Enquire
+                                    </p>
+                                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                        {enquiryHighlights.map((item) => (
+                                            <div key={item} className="flex items-start gap-2.5">
+                                                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#d7b55a]" />
+                                                <p className="text-sm leading-relaxed text-[#343942]">{item}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div data-contact-reveal className="relative z-40 h-full">
+                                <EnquiryForm variant="standalone" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="relative z-10 overflow-hidden bg-[#11161f] py-14 sm:py-16">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(78,205,196,0.14),transparent_42%)]" />
+                    <div className="web-giant-container relative z-10">
+                        <div data-contact-reveal className="mb-6 flex flex-wrap items-center justify-between gap-4">
+                            <div>
+                                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#f7dda0]">
+                                    Find Us
+                                </p>
+                                <h2 className="text-3xl font-bold text-white sm:text-[2.1rem]">
+                                    1/40 Raymond Street, Bankstown NSW 2200
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div data-contact-reveal className="overflow-hidden rounded-[1.35rem] border border-white/15 shadow-[0_24px_52px_rgba(0,0,0,0.3)]">
                             <iframe
-                                src="https://www.google.com/maps?q=Dhaka,Bangladesh&output=embed"
-                                className="w-full h-full min-h-[450px] rounded-2xl"
-                                allowFullScreen
+                                title="Invention Training College Location"
+                                src="https://maps.google.com/maps?q=1/40%20Raymond%20Street%20Bankstown%20NSW%202200&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                className="h-[380px] w-full sm:h-[460px]"
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
                             />
-                        </motion.div>
+                        </div>
                     </div>
-                </div>
-            </section>
-
-            {/* Contact Cards */}
-            <section className="relative overflow-hidden py-32 bg-light">
-                <div
-                    className="absolute inset-0 bg-cover bg-center bg-fixed"
-                    style={{
-                        backgroundImage: "url('https://images.pexels.com/photos/5324853/pexels-photo-5324853.jpeg')"
-                    }}
-                />
-                <div className="absolute inset-0 bg-[#0A0A0A]/35" />
-
-                <div className="relative z-10 max-w-7xl mx-auto px-6">
-                    <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-                        {contactInfo.map((item, index) => (
-                            <motion.div
-                                key={item.title}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="relative overflow-hidden rounded-[10px] border border-white/25 bg-[linear-gradient(145deg,rgba(18,18,18,0.46)_0%,rgba(12,12,12,0.56)_50%,rgba(8,8,8,0.5)_100%)] backdrop-blur-xl p-8 shadow-[0_14px_40px_rgba(0,0,0,0.32)] min-h-[280px] group"
-                            >
-                                <div className="absolute inset-[1px] rounded-[9px] bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_35%,rgba(255,255,255,0.01)_100%)] pointer-events-none" />
-                                <div className="absolute -right-24 -top-24 w-72 h-72 rounded-full bg-[radial-gradient(circle,_rgba(255,255,255,0.15)_0%,_rgba(255,255,255,0.05)_45%,_transparent_72%)] blur-2xl pointer-events-none" />
-                                <div className="absolute -left-28 -bottom-28 w-[280px] h-[280px] rounded-full bg-[radial-gradient(circle,_rgba(255,255,255,0.1)_0%,_rgba(255,255,255,0.03)_50%,_transparent_76%)] blur-2xl pointer-events-none" />
-                                <div className="absolute inset-0 bg-black/18 group-hover:bg-black/10 transition-colors" />
-
-                                <div className="relative z-10">
-                                    <div className="w-14 h-14 rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm flex items-center justify-center mb-6">
-                                        <item.icon className="w-6 h-6 text-[#F2EEE3]" />
-                                    </div>
-                                    <h4 className="text-[#C4CED8] text-sm uppercase tracking-wider mb-3 font-semibold">{item.title}</h4>
-                                    {item.link ? (
-                                        <a
-                                            href={item.link}
-                                            className={`block max-w-full text-[#F2EEE3] text-lg leading-8 font-light hover:text-[#9DDFD8] transition-colors ${item.title === 'Email' ? 'break-all' : 'break-words'}`}
-                                        >
-                                            {item.content}
-                                        </a>
-                                    ) : (
-                                        <>
-                                            <p className="text-[#F2EEE3] text-lg leading-8 font-light break-words">{item.content}</p>
-                                            {item.subtitle && <p className="text-[#C4CED8] text-sm mt-2">{item.subtitle}</p>}
-                                        </>
-                                    )}
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </WebLayout>
-    );
+    )
 }
+
