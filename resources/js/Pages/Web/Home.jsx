@@ -26,6 +26,7 @@ export default function Home() {
             <Categories />
             <WhyChoose />
             <AllCourses />
+            <CTA />
         </WebLayout>
     )
 }
