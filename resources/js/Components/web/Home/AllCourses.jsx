@@ -52,7 +52,7 @@ export default function AllCourses() {
                             transition={{ delay: i * 0.07, duration: 0.6, ease: 'easeOut' }}
                         >
                             <Link
-                                href={`/course/${course.id}`}
+                                href={`/courses/${course.slug || course.id}`}
                                 className="group block overflow-hidden rounded-[1.5rem] border border-[#1d1f22]/12 bg-white shadow-[0_10px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(0,0,0,0.12)]"
                             >
                                 <div className="relative h-52 overflow-hidden">
