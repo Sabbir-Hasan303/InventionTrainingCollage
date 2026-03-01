@@ -39,7 +39,7 @@
 
 /* Body & HTML */
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     scrollbar-gutter: stable;
     overflow-y: scroll;
 }
@@ -52,7 +52,7 @@ body {
     line-height: 1.6;
     background-color: #1D1F22;
     padding-right: 0 !important;
-    overflow-y: auto !important;
+    overflow-y: auto;
 }
 
 .bg-dark {
