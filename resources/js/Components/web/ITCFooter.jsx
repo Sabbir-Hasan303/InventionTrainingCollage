@@ -12,12 +12,12 @@ const quickLinks = [
 ]
 
 const courseLinks = [
-    { label: 'Certificate II in Security Operations', path: '/course/cpp20218' },
-    { label: 'Diploma of Community Services', path: '/course/chc52021' },
-    { label: 'Certificate IV in Disability Support', path: '/course/chc43121' },
-    { label: 'Certificate III in Individual Support', path: '/course/chc33021' },
-    { label: 'Certificate IV in Ageing Support', path: '/course/chc43015' },
-    { label: 'Certificate III in Early Childhood Education', path: '/course/chc30121' },
+    { label: 'Certificate II in Security Operations', path: '/courses/certificate-ii-in-security-operations' },
+    { label: 'Diploma of Community Services', path: '/courses/diploma-of-community-services' },
+    { label: 'Certificate IV in Disability Support', path: '/courses/certificate-iv-in-disability-support' },
+    { label: 'Certificate III in Individual Support', path: '/courses/certificate-iii-in-individual-support' },
+    { label: 'Certificate IV in Ageing Support', path: '/courses/certificate-iv-in-ageing-support' },
+    { label: 'Certificate III in Early Childhood Education', path: '/courses/certificate-iii-in-early-childhood-education-and-care' },
 ]
 
 const socialLinks = [

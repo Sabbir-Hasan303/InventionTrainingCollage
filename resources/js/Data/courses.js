@@ -3,9 +3,12 @@ export const courses = [
         id: "cpp20218",
         code: "CPP20218",
         title: "Certificate II in Security Operations",
+        slug: "certificate-ii-in-security-operations",
         category: "security",
         categoryLabel: "Security",
         level: "Certificate II",
+        shortDescription: "Gain practical skills for entry-level security roles including guarding, crowd control, and event security.",
+        status: "open",
         overview: [
             "The CPP20218 Certificate II in Security Operations reflects the role of individuals who apply a broad range of knowledge and skills in security operations. This qualification provides the competencies required to work as a security officer in unarmed guarding roles, subject to relevant state or territory licensing requirements.",
             "Work is performed under routine supervision in a range of security settings, including static guarding, crowd control, retail security and event security."
@@ -66,15 +69,18 @@ export const courses = [
         licensingDisclaimer: "This qualification is linked to licensing requirements in most Australian states and territories. Students must meet the applicable regulatory and licensing requirements in their state or territory to work as a security officer. In NSW, security licensing is regulated by NSW Fair Trading. Applicants must meet eligibility criteria including age, criminal history and identity requirements. Invention Training College Pty Ltd does not guarantee the issuance of a security licence.",
         image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80",
         icon: "Shield",
-        duration: "Approx. 12–16 weeks",
+        duration: "Approx. 12-16 weeks",
     },
     {
         id: "chc52021",
         code: "CHC52021",
         title: "Diploma of Community Services",
+        slug: "diploma-of-community-services",
         category: "community-care",
         categoryLabel: "Community & Care",
         level: "Diploma",
+        shortDescription: "Develop advanced skills to coordinate and deliver person-centred community services programs.",
+        status: "open",
         overview: [
             "The CHC52021 Diploma of Community Services reflects the role of community services workers involved in the delivery, management and coordination of person-centred services to individuals, groups and communities.",
             "Workers at this level may provide direct support, supervise other workers and volunteers, manage service delivery, and develop programs in response to client needs. They apply specialised skills and knowledge and may be responsible for planning and implementing community-based programs.",
@@ -139,15 +145,18 @@ export const courses = [
         deliveryNote: "Delivery mode is confirmed prior to enrolment.",
         image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&q=80",
         icon: "Heart",
-        duration: "Approx. 12–18 months",
+        duration: "Approx. 12-18 months",
     },
     {
         id: "chc43121",
         code: "CHC43121",
         title: "Certificate IV in Disability Support",
+        slug: "certificate-iv-in-disability-support",
         category: "community-care",
         categoryLabel: "Community & Care",
         level: "Certificate IV",
+        shortDescription: "Build leadership-ready disability support capability for complex client and team-based environments.",
+        status: "open",
         overview: [
             "The CHC43121 Certificate IV in Disability Support reflects the role of experienced support workers who provide person-centred services to people with disability. Workers at this level may provide leadership and guidance to others and contribute to service planning and delivery.",
             "Individuals use discretion and judgement within established organisational policies and procedures. They may work autonomously and are often responsible for supporting clients with complex needs in residential, community, and in-home environments."
@@ -201,15 +210,18 @@ export const courses = [
         deliveryNote: "Delivery mode is confirmed prior to enrolment.",
         image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&q=80",
         icon: "Accessibility",
-        duration: "Approx. 6–12 months",
+        duration: "Approx. 6-12 months",
     },
     {
         id: "chc33021",
         code: "CHC33021",
         title: "Certificate III in Individual Support",
+        slug: "certificate-iii-in-individual-support",
         category: "community-care",
         categoryLabel: "Community & Care",
         level: "Certificate III",
+        shortDescription: "Start your care career with practical training in aged care, disability, and community support.",
+        status: "open",
         overview: [
             "The CHC33021 Certificate III in Individual Support reflects the role of individuals who provide person-centred support to people who may require assistance due to ageing, disability, or other support needs.",
             "Workers at this level use discretion and judgement in relation to individual support and may work in residential facilities, community settings, or in a client's home. They may work independently or under supervision and are required to follow individualised care plans and organisational policies and procedures."
@@ -249,7 +261,7 @@ export const courses = [
             { code: "CHCDIS021", name: "Empower people with disability to achieve greater levels of independence" },
             { code: "CHCPAL003", name: "Deliver care services using a palliative approach" },
         ],
-        electiveNote: "Example – Disability specialisation. Final selection must meet packaging rules. Electives may change in accordance with training package requirements.",
+        electiveNote: "Example - Disability specialisation. Final selection must meet packaging rules. Electives may change in accordance with training package requirements.",
         workPlacement: {
             hours: 120,
             description: "Students are required to complete a minimum of 120 hours of vocational placement in an approved aged care, disability, or community services setting, as required by the qualification assessment conditions."
@@ -268,15 +280,18 @@ export const courses = [
         deliveryNote: "Delivery mode is confirmed prior to enrolment.",
         image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80",
         icon: "HandHeart",
-        duration: "Approx. 6–12 months",
+        duration: "Approx. 6-12 months",
     },
     {
         id: "chc43015",
         code: "CHC43015",
         title: "Certificate IV in Ageing Support",
+        slug: "certificate-iv-in-ageing-support",
         category: "community-care",
         categoryLabel: "Community & Care",
         level: "Certificate IV",
+        shortDescription: "Advance your aged care expertise with specialised support, supervision, and service coordination skills.",
+        status: "open",
         overview: [
             "The CHC43015 Certificate IV in Ageing Support reflects the role of support workers who complete specialised tasks and functions in aged care services. Workers at this level support the wellbeing and independence of older people and may have responsibility for supervising and coordinating limited aspects of service delivery.",
             "This qualification applies to workers in residential aged care, home care, community care and other ageing support environments. Individuals use discretion and judgement within established organisational policies and procedures and may work autonomously or under limited supervision."
@@ -338,15 +353,18 @@ export const courses = [
         deliveryNote: "Delivery mode is confirmed prior to enrolment.",
         image: "https://images.unsplash.com/photo-1556484687-30636164638b?w=1200&q=80",
         icon: "Clock",
-        duration: "Approx. 12–18 months",
+        duration: "Approx. 12-18 months",
     },
     {
         id: "chc30121",
         code: "CHC30121",
         title: "Certificate III in Early Childhood Education and Care",
+        slug: "certificate-iii-in-early-childhood-education-and-care",
         category: "education-childcare",
         categoryLabel: "Education & Childcare",
         level: "Certificate III",
+        shortDescription: "Prepare for early childhood roles by building practical skills in learning, safety, and care practice.",
+        status: "open",
         overview: [
             "The CHC30121 Certificate III in Early Childhood Education and Care reflects the role of educators who work in regulated children's education and care services in Australia, including long day care centres, family day care, preschools and outside school hours care services.",
             "Graduates develop the skills and knowledge required to support children's health, safety and wellbeing, and to promote learning and development within approved learning frameworks. Educators apply discretion and judgement while working under supervision or independently within established policies and procedures."
@@ -404,13 +422,15 @@ export const courses = [
             "Online delivery"
         ],
         deliveryNote: "Delivery mode is confirmed at enrolment.",
-        image: "https://images.unsplash.com/photo-1587654780199-56b tried?w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80",
         icon: "Baby",
-        duration: "Approx. 12–18 months",
+        duration: "Approx. 12-18 months",
     },
 ];
 
 export const getCourseById = (id) => courses.find(c => c.id === id);
+
+export const getCourseBySlug = (slug) => courses.find(c => c.slug === slug);
 
 export const getCoursesByCategory = (category) =>
     courses.filter(c => c.category === category);
@@ -438,3 +458,13 @@ export const categories = [
         courses: ["cpp20218"],
     },
 ];
+
+export const getCategoryById = (categoryId) =>
+    categories.find(c => c.id === categoryId);
+
+export const getCourseSlugMap = () =>
+    courses.reduce((acc, course) => {
+        acc[course.id] = course.slug;
+        return acc;
+    }, {});
+
