@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Link, usePage } from '@inertiajs/react'
+import { Head, Link, usePage } from '@inertiajs/react'
 import {
     AlertTriangle,
     BookOpen,
@@ -98,9 +98,12 @@ export default function CourseDetails({ slug = null, legacyId = null }) {
         return null
     }, [fallbackSlug, legacyId, slug])
 
+    const pageTitle = course?.title || slug || fallbackSlug || 'Course Details'
+
     if (!course) {
         return (
             <WebLayout>
+                <Head title={pageTitle} />
                 <section className="bg-light py-36">
                     <div className="web-giant-container">
                         <div className="mx-auto max-w-2xl rounded-2xl border border-[#1d1f22]/12 bg-white p-10 text-center shadow-[0_12px_30px_rgba(0,0,0,0.08)]">
@@ -122,13 +125,15 @@ export default function CourseDetails({ slug = null, legacyId = null }) {
 
     return (
         <WebLayout>
+            <Head title={pageTitle} />
             <section className="relative overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-36">
                 <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url(${course.image})` }}
                 />
-                <div className="absolute inset-0 bg-[#0c1016]/78" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0b1119]/84 via-[#0b1119]/66 to-[#0b1119]/56" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#090a0d]/90 via-[#090a0d]/58 to-[#090a0d]/78" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(215,181,90,0.22),transparent_45%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_80%,rgba(94,196,184,0.18),transparent_46%)]" />
 
                 <div className="web-giant-container relative z-10">
                     <Link href="/courses" className="mb-6 inline-flex text-xs font-semibold uppercase tracking-[0.14em] text-[#f4d186]">
