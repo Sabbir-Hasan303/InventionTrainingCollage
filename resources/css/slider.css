@@ -1,0 +1,12 @@
+.slider-img {
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, clip-path;
+}
+
+.slider-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}

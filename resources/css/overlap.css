@@ -1,0 +1,92 @@
+ svg{
+    width:104px;
+    height:104px;
+    z-index: 3;
+  }
+
+  .wrapper{
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 8em 2em;
+  }
+
+  .video-bg{
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .video-bg svg{
+    position: absolute;
+  }
+
+  .image-parent{
+    height:100%;
+    overflow:hidden;
+  }
+
+  .image-child{
+    height:120%;
+  }
+
+  img{
+    display:block;
+    max-width: 100%;
+    opacity: .6;
+  }
+
+  article{
+    display: grid;
+  }
+
+  .reverse-overlapping{
+      z-index: 2
+    }
+
+  @media (min-width:50em){
+
+    article{
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .overlapping,
+    .overlapping-video-bg,
+    .reverse-overlapping,
+    .reverse-overlapping-video-bg{
+      grid-row: 1 / 2;
+    }
+
+    .overlapping{
+     z-index: 2;
+     grid-column: 1 / 4;
+     align-self: end;
+    }
+
+    .overlapping-video-bg{
+     grid-column: 2 / -1;
+    }
+
+    .reverse-overlapping{
+      grid-column: 4 / -1;
+      align-self: center;
+    }
+
+    .reverse-overlapping-video-bg{
+     grid-column: 1 / 5;
+    }
+  }
+
+  .unsplash{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8em 0;
+  }
+
+  @media (prefers-reduced-motion) {
+    .animation {
+      animation-name: dissolve;
+    }
+  }

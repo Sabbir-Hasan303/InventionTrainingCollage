@@ -1,0 +1,25 @@
+.mainBoxes,
+.photoBox,
+.mainClose {
+  position: absolute;
+}
+
+.main {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mainBoxes {
+  height: 100%;
+}
+
+.photoBox {
+  border-radius: 20px;
+  will-change: transform;
+}
+
+.mainClose {
+  position: fixed;
+  pointer-events: none;
+}

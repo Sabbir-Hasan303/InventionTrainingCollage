@@ -1,0 +1,244 @@
+
+.illustration-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width:400px;
+    display: block;
+  }
+
+  .illustration-wrapper img {
+    width:100%;
+    max-width:400px;
+  }
+  .one {
+    position: absolute;
+    top: 15%;
+    left: 20%;
+  }
+
+  .two {
+    position: absolute;
+    top: 29%;
+    left: 70%;
+  }
+
+  .three {
+    position: absolute;
+    top: 39%;
+    left: 20%;
+  }
+
+  .four {
+    position: absolute;
+    top: 39%;
+    left: 48%;
+  }
+
+  .five {
+    position: absolute;
+    top: 49%;
+    left: 70%;
+  }
+
+  .six {
+    position: absolute;
+    top: 61%;
+    left: 30%;
+  }
+
+  .seven {
+    position: absolute;
+    top: 69%;
+    left: 65%;
+  }
+
+  .eight {
+    position: absolute;
+    top: 74%;
+    left: 20%;
+  }
+
+  .nine {
+    position: absolute;
+    top: 81%;
+    left: 80%;
+  }
+
+  .ten {
+    position: absolute;
+    top: 86%;
+    left: 48%;
+  }
+
+  .hotspot {
+    position: absolute;
+    cursor:pointer;
+    border-radius: 100%;
+    background-color: #01426A;
+    opacity: 1;
+    height: 30px;
+    width: 30px;
+    border: none;
+    transition: transform 1s ease-in 0s;
+      animation-duration: 1.5s;
+      animation-name: pulse;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    -webkit-animation-duration: 1.5s;
+      -webkit-animation-name: pulse;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-direction: alternate;
+    -webkit-animation-timing-function: ease-in-out; /* Chrome, Safari, Opera */
+    animation-timing-function: ease-in-out;
+    z-index: 999;
+    -webkit-box-shadow: 0 0 4px 0 rgba(255,255,255,.3);
+    box-shadow: 0 0 4px 0 rgba(255,255,255,.3);
+    -webkit-transition: background-color 2s ease-out;
+    -moz-transition: background-color 2s ease-out;
+    -o-transition: background-color 2s ease-out;
+    transition: background-color 2s ease-out;
+  }
+
+  .hotspot::before {
+    content: '+';
+    font-family: 'Barlow Condensed', sans-serif;
+    color:#fff;
+    font-size:30px;
+    line-height:27px;
+    text-align:center;
+    width:100%;
+    display:block;
+  }
+
+  .hotspot:hover, a[aria-expanded="true"] {
+    background: #0057ae; /* Old browsers */
+    background: -moz-linear-gradient(45deg,  #0057ae 1%, #69dbff 99%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg,  #0057ae 1%,#69dbff 99%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg,  #0057ae 1%,#69dbff 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0057ae', endColorstr='#69dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  }
+  .ripples {
+  border-radius: 50%;
+  border: 1px solid #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: all .3s;
+  pointer-events: none;
+  animation-name: ripple;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+    width: 234%;
+  height: 234%;
+  animation-delay: .6s;
+  }
+
+  .ripples::before {
+    content: '';
+  width: 65%;
+  height: 65%;
+  animation-delay: .3s;
+    border-radius: 50%;
+  border: 1px solid #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: all .3s;
+  pointer-events: none;
+  animation-name: ripple;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  }
+
+  @keyframes ripple {
+  0% {
+      border-color: rgba(255,255,255,.4);
+  }
+  50% {
+      border-color: rgba(255,255,255, .8);
+  }
+  100% {
+      border-color: rgba(255,255,255, .4);
+  }
+  }
+
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(1.2);
+    }
+  }
+
+  @-webkit-keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(1.1);
+    }
+  }
+
+  .tippy-backdrop {
+    background-color: #f9f9f9;
+  }
+
+  .tippy-tooltip.honeybee-theme {
+    /* Your styling here. Example: */
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,.3);
+  }
+
+  .tippy-tooltip.honeybee-theme .tippy-content{
+    /* Your styling here. Example: */
+    background-color: #fff;
+    text-align: left;
+    color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.3);
+  }
+
+  .tippy-tooltip.honeybee-theme .tippy-content h2 {
+    /* Your styling here. Example: */
+    font-size: 24px;
+  }
+
+  .tippy-tooltip.honeybee-theme .tippy-content p {
+    /* Your styling here. Example: */
+    font-size: 16px;
+  }
+
+  .tippy-tooltip.honeybee-theme .tippy-content button {
+    /* Your styling here. Example: */
+    background-color: cornflowerblue;
+    color: #fff;
+    border-radius: 2.5px;
+    padding: 10px 20px;
+    outline: 0;
+    border: 0;
+    font-size: 14px;
+  }
+
+  .tippy-tooltip.honeybee-theme .tippy-content a {
+    /* Your styling here. Example: */
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+
+  .tippy-arrow {
+      border-bottom-color: #fff !important;
+      border-top-color: #fff !important;
+  }

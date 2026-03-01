@@ -1,0 +1,335 @@
+@import "app.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+/* @font-face {
+    font-display: swap;
+    font-family: 'Brown';
+    font-style: normal;
+    font-weight: 100;
+    src: url('/assets/font/Brown-Thin.woff2') format('woff2'),
+        url('/assets/font/Brown-Thin.ttf') format('truetype');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Brown';
+    font-style: normal;
+    font-weight: 300;
+    src: url('/assets/font/Brown-Light.woff2') format('woff2'),
+        url('/assets/font/Brown-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Brown';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/assets/font/Brown-Bold.woff2') format('woff2'),
+        url('/assets/font/Brown-Bold.ttf') format('truetype');
+} */
+
+/* ================================================================
+   GLOBAL TAG STYLING
+   ================================================================ */
+
+/* Body & HTML */
+html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    background-color: #1D1F22;
+    padding-right: 0 !important;
+    overflow-y: auto !important;
+}
+
+.bg-dark {
+    background-color: #1D1F22;
+}
+
+.bg-light-dark {
+    background-color: #282A2D;
+}
+
+.bg-light {
+    background-color: #F9F8F6;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0.5rem 0 1rem 0;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fffce1;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+h5 {
+    font-size: 1.1rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 0 0 1rem 0;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin: 0.25rem 0;
+}
+
+/* ================================================================
+   WEB GIANT CONTAINER
+   Use: className="web-giant-container"
+   ================================================================ */
+
+:root {
+    --web-container-max: 1460px;
+    --web-container-pad: clamp(16px, 1.8vw, 30px);
+}
+
+.web-giant-container {
+    width: 100%;
+    max-width: var(--web-container-max);
+    margin-inline: auto;
+    padding-inline: var(--web-container-pad);
+}
+
+/* Narrow phones */
+@media (max-width: 479px) {
+    .web-giant-container {
+        padding-inline: 14px;
+    }
+}
+
+/* Large desktops */
+@media (min-width: 1536px) {
+    .web-giant-container {
+        --web-container-max: 1560px;
+        --web-container-pad: 30px;
+    }
+}
+
+/* Ultra-wide monitors */
+@media (min-width: 1920px) {
+    .web-giant-container {
+        --web-container-max: 1680px;
+        --web-container-pad: 34px;
+    }
+}
+
+/* 2K/4K displays */
+@media (min-width: 2560px) {
+    .web-giant-container {
+        --web-container-max: 1760px;
+        --web-container-pad: 38px;
+    }
+}
+
+/* Medium Container */
+.web-medium-container {
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+    padding-inline: var(--web-container-pad);
+}
+
+/* Small Container */
+.web-small-container {
+    width: 100%;
+    max-width: 72rem
+        /* 1152px */
+    ;
+    margin-inline: auto;
+    padding-inline: var(--web-container-pad);
+}
+
+/* ================================================================
+   WEB GLOBAL FOCUS RING RESET
+   Removes Tailwind ring shadow (blue outline) for web pages
+   ================================================================ */
+:where(input, textarea, select, button):focus,
+:where(input, textarea, select, button):focus-visible {
+    outline: none !important;
+    --tw-ring-inset: initial !important;
+    --tw-ring-offset-width: 0px !important;
+    --tw-ring-offset-color: transparent !important;
+    --tw-ring-color: transparent !important;
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    /* background: #fafcfb; */
+    /* black */
+    background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #8a8a8a;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #636363;
+}
+
+/* Font Style */
+/* --- Hero Sub-Title --- */
+.hero-sub-title {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    line-height: 14.4px;
+    text-transform: uppercase;
+}
+
+@media (min-width: 1024px) {
+    .hero-sub-title {
+        font-size: 16px;
+        letter-spacing: 1.4851px;
+        line-height: 22.3906px;
+    }
+}
+
+/* --- Hero Title --- */
+.hero-title {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 40.0312px;
+    letter-spacing: 2.52px;
+    text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+    .hero-title {
+        font-size: 48px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-title {
+        font-size: 50px;
+        line-height: 71.5px;
+        letter-spacing: 4.5451px;
+    }
+}
+
+/* --- Hero Description --- */
+.hero-description {
+    font-size: 16px;
+    line-height: 1.625;
+}
+
+@media (min-width: 1024px) {
+    .hero-description {
+        font-size: 21px;
+        line-height: 30.2344px;
+    }
+}
+
+
+.section-title {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 52.9062px;
+    letter-spacing: 3.3751px;
+    text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+    .section-title {
+        font-size: 37px;
+    }
+}
+
+.section-sub-title {
+    font-size: 11px;
+    line-height: 14.4px;
+    letter-spacing: 1.1251px;
+    text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+    .section-sub-title {
+        font-size: 14px;
+    }
+}
+
+.card-title-big {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26.0156px;
+    letter-spacing: 1.98px;
+    text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+    .card-title-big {
+        font-size: 25px;
+        line-height: 35.0234px;
+    }
+}
+
+.card-description-big {
+    font-size: 18px;
+    line-height: 1.625;
+}
+
+.card-title-sm {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
+    letter-spacing: 1.8451px;
+    text-transform: uppercase;
+}
+
+.card-description-sm {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 300;
+}

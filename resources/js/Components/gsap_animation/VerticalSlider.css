@@ -1,0 +1,6 @@
+@media (hover: none) {
+    .vs-tooltips,
+    .vs-nav-info {
+        visibility: hidden;
+    }
+}
