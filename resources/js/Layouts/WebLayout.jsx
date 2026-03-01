@@ -38,11 +38,11 @@ export default function WebLayout({ children }) {
         const smoother = ScrollSmoother.create({
             wrapper: smoothWrapperRef.current,
             content: smoothContentRef.current,
-            smooth: 2.4,
-            smoothTouch: 0.35,
-            normalizeScroll: true,
+            smooth: 1.8,
+            smoothTouch: 0,
             effects: true,
-            speed: 0.9,
+            normalizeScroll: false,
+            speed: 1,
             ignoreMobileResize: true,
         })
 

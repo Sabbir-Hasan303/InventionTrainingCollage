@@ -15,14 +15,28 @@ export default function CTA() {
     useEffect(() => {
         if (!ctaRef.current) return
 
+        const mm = gsap.matchMedia()
         const ctx = gsap.context(() => {
-            ScrollTrigger.create({
-                trigger: ctaRef.current,
-                start: 'top top',
-                end: 'bottom top',
-                pin: bgRef.current,
-                pinSpacing: false,
-                anticipatePin: 1,
+            mm.add('(min-width: 1024px)', () => {
+                ScrollTrigger.create({
+                    trigger: ctaRef.current,
+                    start: 'top top',
+                    end: 'bottom top',
+                    pin: bgRef.current,
+                    pinSpacing: false,
+                    anticipatePin: 1,
+                })
+            })
+
+            mm.add('(max-width: 1023px)', () => {
+                ScrollTrigger.create({
+                    trigger: ctaRef.current,
+                    start: 'top top',
+                    end: 'bottom top',
+                    pin: bgRef.current,
+                    pinSpacing: false,
+                    anticipatePin: 1,
+                })
             })
 
             gsap.fromTo(
@@ -57,7 +71,10 @@ export default function CTA() {
             )
         }, ctaRef)
 
-        return () => ctx.revert()
+        return () => {
+            mm.revert()
+            ctx.revert()
+        }
     }, [])
 
     return (
