@@ -196,7 +196,7 @@ export default function Courses({ category = null }) {
                     >
                         <aside
                             ref={sidebarRef}
-                            className="relative z-40 overflow-visible rounded-[1.35rem] border border-[#1d1f22]/10 bg-white shadow-[0_16px_38px_rgba(0,0,0,0.08)]"
+                            className="relative z-40 mt-3 overflow-visible rounded-[1.35rem] border border-[#1d1f22]/10 bg-white shadow-[0_16px_38px_rgba(0,0,0,0.08)] lg:mt-8"
                         >
                             <div className="rounded-t-[1.35rem] bg-[#1d1f22] px-6 py-6">
                                 <h2 className="text-xl font-bold uppercase tracking-[0.1em] text-white">Find Your Preferred Course</h2>
