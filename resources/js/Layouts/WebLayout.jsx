@@ -10,6 +10,7 @@ import { ScrollSmoother } from "gsap/ScrollSmoother"
 import GoToTopButton from '@/Components/web/GoToTopButton';
 import WhatsAppButton from '@/Components/web/WhatsAppButton';
 import Navbar from "@/Components/web/Home/Navbar"
+import Topbar from "@/Components/web/Home/Topbar";
 import ITCFooter from "@/Components/web/ITCFooter";
 
 export default function WebLayout({ children }) {
@@ -60,6 +61,7 @@ export default function WebLayout({ children }) {
     return (
         <div className='bg-dark' style={{ fontFamily: 'Brown, sans-serif' }}>
             {/* <Navbar /> */}
+            <Topbar />
             <Navbar />
             {/* <CursorFollower /> */}
             <div id="smooth-wrapper" ref={smoothWrapperRef}>

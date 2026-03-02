@@ -12,7 +12,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     {{-- favicon --}}
-    <link rel="icon" href="{{ asset('assets/images/ITC-favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets/images/ITC-favicon.jpg') }}" type="image/x-icon">
 
     <!-- Scripts -->
     @routes
