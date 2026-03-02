@@ -12,9 +12,9 @@ const contactItems = [
     {
         icon: Phone,
         title: 'Call Us',
-        value: '(02) 0000 0000',
+        value: '+61 403 343 814',
         note: 'Monday to Friday, 9:00 AM - 5:00 PM',
-        href: 'tel:+61200000000',
+        href: 'tel:+61403343814',
     },
     {
         icon: Mail,

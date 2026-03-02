@@ -102,9 +102,9 @@ export default function CTA() {
                             Get in touch with our team to discuss your training options. We are here to help you take
                             the next step in your career.
                         </p>
-                        <a href="tel:+61200000000" className="inline-flex items-center gap-2 text-3xl font-semibold text-[#f5c326]">
+                        <a href="tel:+61403343814" className="inline-flex items-center gap-2 text-3xl font-semibold text-[#f5c326]">
                             <Phone className="h-5 w-5" />
-                            (02) 0000 0000
+                            +61 403 343 814
                         </a>
                     </div>
 
