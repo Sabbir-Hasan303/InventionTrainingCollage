@@ -64,7 +64,7 @@ export default function ITCFooter() {
                 <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 md:grid-cols-2 xl:grid-cols-4">
                     <div className="xl:col-span-1">
                         <Link href="/" className="mb-5 inline-flex items-center gap-3">
-                            <img src="/assets/images/ITC-logo3.png" alt="Invention Training College" className="h-16 w-auto object-contain" />
+                            <img src="/assets/images/ITC-logo.jpg" alt="Invention Training College" className="h-24 w-auto object-contain" />
                         </Link>
                         <p className="mb-6 max-w-xs text-sm leading-relaxed text-white/65">
                             Invention Training College Pty Ltd delivers nationally recognised qualifications in community
@@ -153,7 +153,7 @@ export default function ITCFooter() {
                 </div>
 
                 <div className="flex flex-col gap-4 py-6 text-sm text-white/45 lg:flex-row lg:items-center lg:justify-between">
-                    <div className="flex flex-wrap items-center gap-4">
+                    {/* <div className="flex flex-wrap items-center gap-4">
                         <Link href="/privacy" className="transition-colors duration-300 hover:text-white/80">
                             Privacy Policy
                         </Link>
@@ -165,7 +165,7 @@ export default function ITCFooter() {
                         <Link href="/terms" className="transition-colors duration-300 hover:text-white/80">
                             Terms and Conditions
                         </Link>
-                    </div>
+                    </div> */}
                     <p className="mb-0">Copyright {new Date().getFullYear()} Invention Training College Pty Ltd. All rights reserved.</p>
                 </div>
             </div>
