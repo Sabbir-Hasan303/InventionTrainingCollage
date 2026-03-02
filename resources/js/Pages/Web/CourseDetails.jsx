@@ -61,11 +61,11 @@ export default function CourseDetails({ slug = null, legacyId = null }) {
     const { url } = usePage()
     const [openSections, setOpenSections] = useState({
         coreUnits: true,
-        electiveUnits: false,
+        electiveUnits: true,
         entryRequirements: true,
-        deliveryAndAssessment: false,
-        placement: false,
-        licensing: false,
+        deliveryAndAssessment: true,
+        placement: true,
+        licensing: true,
     })
 
     const fallbackSlug = useMemo(() => {
