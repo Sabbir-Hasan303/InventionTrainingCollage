@@ -1,9 +1,12 @@
 import React, { useEffect } from "react"
-import Navbar from "@/Pages/Web/Navbar"
+
 // import Footer from "@/Pages/Web/Footer"
 import '../../css/web.css'
 import { Toaster, toast } from "react-hot-toast"
 import { usePage } from '@inertiajs/react'
+import Navbar from "@/Components/web/Home/Navbar"
+import ITCFooter from "@/Components/web/ITCFooter"
+import Topbar from "@/Components/web/Home/Topbar"
 
 export default function GuestLayout({ children }) {
     const { flash } = usePage().props
@@ -35,9 +38,12 @@ export default function GuestLayout({ children }) {
 
     return (
         <>
+            <Topbar />
             <Navbar />
-            {children}
-            {/* <Footer /> */}
+            <div className="">
+                {children}
+            </div>
+            <ITCFooter />
             <Toaster
                 position="top-right"
                 toastOptions={{

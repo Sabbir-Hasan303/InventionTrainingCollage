@@ -106,6 +106,20 @@ export default function Navbar() {
                                         className="h-full w-full max-w-none object-fill"
                                     />
                                 </div>
+
+                                {/* <div
+                                    className={`pointer-events-none absolute left-1/2 -top-[1.4rem] z-0 flex h-[31px] w-[140px] -translate-x-1/2 items-end transition-opacity duration-500 ease-in-out ${isScrolled ? "opacity-100" : "opacity-0"
+                                        }`}
+                                    aria-hidden="true"
+                                >
+                                    <div className="h-4 w-4 bg-[#161719]/95">
+                                        <div className="h-full w-full rounded-br-full bg-light" />
+                                    </div>
+                                    <div className="h-[32px] flex-1 rounded-t-2xl bg-[#161719]/95" />
+                                    <div className="h-4 w-4 bg-[#161719]/95">
+                                        <div className="h-full w-full rounded-bl-full bg-light" />
+                                    </div>
+                                </div> */}
                                 <Link href="/" className="relative z-10 flex items-center">
                                     <img
                                         src="/assets/images/ITC-logo.jpg"
@@ -284,8 +298,8 @@ export default function Navbar() {
                                                                         href={child.path}
                                                                         onClick={closeMobileMenu}
                                                                         className={`block rounded-lg px-3 py-2 text-sm tracking-[0.07em] uppercase ${isChildActive
-                                                                                ? "bg-white/10 text-[#f7e4af]"
-                                                                                : "text-white/70 hover:bg-white/[0.06] hover:text-white"
+                                                                            ? "bg-white/10 text-[#f7e4af]"
+                                                                            : "text-white/70 hover:bg-white/[0.06] hover:text-white"
                                                                             }`}
                                                                     >
                                                                         {child.label}
