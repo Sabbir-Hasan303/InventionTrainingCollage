@@ -18,16 +18,16 @@ export default function ForgotPassword({ status }) {
         <GuestLayout>
             <Head title="Forgot Password" />
 
-            <div className="min-h-[70vh] w-full flex items-center justify-center px-4 py-12">
-                <div className="w-full max-w-5xl grid md:grid-cols-[1fr_520px] bg-card text-foreground border rounded-2xl overflow-hidden shadow-xl">
+            <div className="bg-[#242629] w-full flex items-center justify-center px-4 pt-48 pb-24">
+                <div className="w-full max-w-5xl grid md:grid-cols-[1fr_520px] bg-light text-foreground border rounded-2xl overflow-hidden shadow-xl">
                     {/* Visual / Brand side */}
                     <div className="relative hidden md:flex flex-col justify-between p-10 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
                         <div>
                             <div className="flex items-center gap-3">
                                 <div className="size-10 rounded-lg bg-primary text-primary-foreground grid place-items-center font-bold">C</div>
-                                <div className="text-xl font-bold tracking-tight">Chronos</div>
+                                <div className="text-xl font-bold tracking-tight">Invention Training</div>
                             </div>
-                            <h2 className="mt-10 text-3xl font-bold leading-tight">Reset your password</h2>
+                            <h2 className="mt-10 text-3xl font-bold leading-tight text-black">Reset your password</h2>
                             <p className="mt-2 text-sm text-muted-foreground max-w-sm">
                                 Enter your email address and we will send you a link to reset your password.
                             </p>
@@ -43,7 +43,7 @@ export default function ForgotPassword({ status }) {
                         )}
 
                         <div className="mb-6">
-                            <h1 className="text-2xl font-bold">Forgot your password?</h1>
+                            <h1 className="text-2xl font-bold text-black">Forgot your password?</h1>
                             <p className="text-sm text-muted-foreground mt-1">We’ll send a reset link to your email</p>
                         </div>
 

@@ -132,11 +132,11 @@ export default function ITCFooter() {
                             </li>
                             <li className="list-none">
                                 <a
-                                    href="tel:+61403343814"
+                                    href="tel:+0492050353"
                                     className="flex items-center gap-3 text-sm text-white/70 transition-colors duration-300 hover:text-[#f4d489]"
                                 >
                                     <Phone className="h-4 w-4 text-[#f1ce7e]" />
-                                    +61 403 343 814
+                                    +0492 050 353
                                 </a>
                             </li>
                             <li className="list-none">

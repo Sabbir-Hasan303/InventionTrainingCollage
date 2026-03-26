@@ -89,7 +89,7 @@ export default function Hero() {
 
                     <h1 className="mb-6 text-4xl font-bold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
                         Start a Meaningful Career with
-                        <span className="block text-[#f5d078]">Practical, Job-Ready Training</span>
+                        <span className="text-[#f5d078]"> Practical Training</span>
                     </h1>
 
                     <p className="mb-10 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
