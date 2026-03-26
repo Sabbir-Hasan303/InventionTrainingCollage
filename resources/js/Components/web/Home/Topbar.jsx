@@ -105,7 +105,7 @@ export default function Topbar() {
                         className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 transition-colors ${chipTone}`}
                     >
                         <LocalPhoneOutlinedIcon sx={{ fontSize: 13 }} className="text-[#d7b55a]" />
-                        <span>+61 3 9000 0000</span>
+                        <span>+0492 050 353</span>
                     </a>
                 </div>
             </div>

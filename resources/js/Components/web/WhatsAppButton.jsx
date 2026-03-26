@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 export default function WhatsAppButton() {
-  const phoneNumber = '+61 403 343 814';
+  const phoneNumber = '+0492 050 353';
   const message = 'Hello, I am interested in learning more about your courses.';
   const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
 
