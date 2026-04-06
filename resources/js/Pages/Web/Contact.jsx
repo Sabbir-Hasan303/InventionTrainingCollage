@@ -95,7 +95,7 @@ export default function Contact() {
                 <section className="relative isolate min-h-[72vh] overflow-hidden pt-28 sm:pt-32">
                     <img
                         data-contact-parallax
-                        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2200&q=80"
+                        src="/assets/images/learning-pathways.avif"
                         alt="Students discussing learning pathways"
                         className="absolute inset-0 h-full w-full object-cover"
                     />

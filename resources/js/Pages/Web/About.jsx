@@ -252,19 +252,19 @@ export default function About() {
                                 </p>
                             </div>
 
-                            <div data-reveal className="relative h-[360px] sm:h-[440px]">
+                            <div data-reveal className="relative h-[360px] sm:h-[640px]">
                                 <div className="absolute left-0 top-0 h-[76%] w-[76%] overflow-hidden rounded-[1.4rem] shadow-[0_22px_44px_rgba(0,0,0,0.2)]">
                                     <img
                                         data-parallax
-                                        src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80"
+                                        src="/assets/images/training-provider.png"
                                         alt="Compliance and quality documentation"
                                         className="h-full w-full object-cover"
                                     />
                                 </div>
-                                <div className="absolute bottom-0 right-0 h-[62%] w-[62%] overflow-hidden rounded-[1.2rem] border-4 border-[#f9f8f6] shadow-[0_18px_36px_rgba(0,0,0,0.22)]">
+                                <div className="absolute bottom-0 right-0 h-[45%] w-[62%] overflow-hidden rounded-[1.2rem] border-4 border-[#f9f8f6] shadow-[0_18px_36px_rgba(0,0,0,0.22)]">
                                     <img
                                         data-parallax
-                                        src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1400&q=80"
+                                        src="/assets/images/training-provider2.png"
                                         alt="Students in collaborative learning"
                                         className="h-full w-full object-cover"
                                     />
@@ -313,7 +313,7 @@ export default function About() {
                         <div ref={standardsBgRef} className="relative h-full w-full">
                             <img
                                 ref={standardsImageRef}
-                                src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=2200&q=80"
+                                src="/assets/images/education-setting.jfif"
                                 alt="Students and trainer in education setting"
                                 className="h-full w-full object-cover will-change-transform"
                             />

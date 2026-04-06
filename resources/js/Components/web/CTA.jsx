@@ -82,12 +82,12 @@ export default function CTA() {
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <div ref={bgRef} className="relative h-full w-full">
                     <img
-                        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2200&q=80"
+                        src="/assets/images/banners/banner4.avif"
                         alt=""
                         aria-hidden="true"
                         className="h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,15,24,0.68)_0%,rgba(9,15,24,0.46)_52%,rgba(9,15,24,0.34)_100%)]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.2)_0%,rgba(0,0,0,0.2)_52%,rgba(0,0,0,0)_100%)]" />
                     <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(4,8,14,0.26),rgba(4,8,14,0.26))]" />
                 </div>
             </div>

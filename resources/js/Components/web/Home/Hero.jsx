@@ -4,9 +4,9 @@ import { Link } from '@inertiajs/react'
 import { ArrowRight, GraduationCap } from 'lucide-react'
 
 const bgPhotos = [
-    'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=2200&q=80',
-    'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=2200&q=80',
-    'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=2200&q=80',
+    '/assets/images/banners/banner1.avif',
+    '/assets/images/banners/banner2.avif',
+    '/assets/images/banners/banner3.avif',
 ]
 
 export default function Hero() {

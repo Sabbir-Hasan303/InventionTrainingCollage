@@ -67,7 +67,7 @@ export const courses = [
         ],
         assessmentNote: "Students must demonstrate competency in all units before a qualification or statement of attainment is issued.",
         licensingDisclaimer: "This qualification is linked to licensing requirements in most Australian states and territories. Students must meet the applicable regulatory and licensing requirements in their state or territory to work as a security officer. In NSW, security licensing is regulated by NSW Fair Trading. Applicants must meet eligibility criteria including age, criminal history and identity requirements. Invention Training College Pty Ltd does not guarantee the issuance of a security licence.",
-        image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80",
+        image: "/assets/images/security-certificate.png",
         icon: "Shield",
         duration: "Approx. 12-16 weeks",
     },
@@ -143,7 +143,7 @@ export const courses = [
             "Online delivery"
         ],
         deliveryNote: "Delivery mode is confirmed prior to enrolment.",
-        image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&q=80",
+        image: "/assets/images/diploma-of-community-services.jfif",
         icon: "Heart",
         duration: "Approx. 12-18 months",
     },
@@ -208,7 +208,7 @@ export const courses = [
             "Online delivery"
         ],
         deliveryNote: "Delivery mode is confirmed prior to enrolment.",
-        image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&q=80",
+        image: "/assets/images/disability-support.jfif",
         icon: "Accessibility",
         duration: "Approx. 6-12 months",
     },
@@ -278,7 +278,7 @@ export const courses = [
             "Online delivery"
         ],
         deliveryNote: "Delivery mode is confirmed prior to enrolment.",
-        image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80",
+        image: "/assets/images/individual-support.jfif",
         icon: "HandHeart",
         duration: "Approx. 6-12 months",
     },
@@ -351,7 +351,7 @@ export const courses = [
             "Online delivery"
         ],
         deliveryNote: "Delivery mode is confirmed prior to enrolment.",
-        image: "https://images.unsplash.com/photo-1556484687-30636164638b?w=1200&q=80",
+        image: "/assets/images/ageing-support.jfif",
         icon: "Clock",
         duration: "Approx. 12-18 months",
     },
@@ -422,7 +422,7 @@ export const courses = [
             "Online delivery"
         ],
         deliveryNote: "Delivery mode is confirmed at enrolment.",
-        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80",
+        image: "/assets/images/childhood-education.jfif",
         icon: "Baby",
         duration: "Approx. 12-18 months",
     },
@@ -440,21 +440,21 @@ export const categories = [
         id: "community-care",
         title: "Community & Care",
         description: "Build a career supporting individuals and communities through aged care, disability support, and community services.",
-        image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=1200&q=80",
+        image: "/assets/images/community-care.jfif",
         courses: ["chc52021", "chc43121", "chc33021", "chc43015"],
     },
     {
         id: "education-childcare",
         title: "Education & Childcare",
         description: "Shape the future by nurturing young minds in early childhood education and care settings.",
-        image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200&q=80",
+        image: "/assets/images/education-childcare.jfif",
         courses: ["chc30121"],
     },
     {
         id: "security",
         title: "Security",
         description: "Launch your career in the security industry with nationally recognised qualifications and licensing pathways.",
-        image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80",
+        image: "/assets/images/security.jfif",
         courses: ["cpp20218"],
     },
 ];
