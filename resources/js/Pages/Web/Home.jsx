@@ -13,8 +13,8 @@ export default function Home() {
             <Head title="Home" />
             <HomeHero />
             <Categories />
-            <WhyChoose />
             <AllCourses />
+            <WhyChoose />
             <CTA />
         </WebLayout>
     )

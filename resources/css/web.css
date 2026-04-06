@@ -55,6 +55,21 @@ body {
     overflow-y: auto;
 }
 
+#smooth-wrapper.smooth-scroll-active {
+    overflow: hidden;
+}
+
+#smooth-content.smooth-scroll-active {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Fix sub-pixel seam/glitch at section boundaries (ScrollSmoother transform artifact) */
+#smooth-content.smooth-scroll-active > * + * {
+    margin-top: -1px;
+}
+
 .bg-dark {
     background-color: #1D1F22;
 }

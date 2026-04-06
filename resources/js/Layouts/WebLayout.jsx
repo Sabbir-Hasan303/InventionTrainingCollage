@@ -20,6 +20,11 @@ export default function WebLayout({ children }) {
     const smoothWrapperRef = useRef(null)
     const smoothContentRef = useRef(null)
 
+    const setSmootherClasses = (enabled) => {
+        smoothWrapperRef.current?.classList.toggle('smooth-scroll-active', enabled)
+        smoothContentRef.current?.classList.toggle('smooth-scroll-active', enabled)
+    }
+
     useEffect(() => {
         if (flash?.success) {
             toast.success(flash.success)
@@ -36,6 +41,8 @@ export default function WebLayout({ children }) {
         const existingSmoother = ScrollSmoother.get()
         if (existingSmoother) existingSmoother.kill()
 
+        setSmootherClasses(true)
+
         const smoother = ScrollSmoother.create({
             wrapper: smoothWrapperRef.current,
             content: smoothContentRef.current,
@@ -43,11 +50,13 @@ export default function WebLayout({ children }) {
             smoothTouch: 0,
             effects: true,
             normalizeScroll: false,
+            wholePixels: true,
             speed: 1,
             ignoreMobileResize: true,
         })
 
         return () => {
+            setSmootherClasses(false)
             smoother.kill()
         }
     }, [])
