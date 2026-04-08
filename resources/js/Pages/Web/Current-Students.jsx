@@ -317,7 +317,7 @@ export default function CurrentStudents() {
                                         />
                                     </label>
 
-                                    <fieldset className="space-y-2 col-span-2">
+                                    <fieldset className="space-y-2 sm:col-span-2">
                                         <legend className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
                                             Support Option
                                         </legend>
@@ -344,7 +344,7 @@ export default function CurrentStudents() {
                                         </div>
                                     </fieldset>
 
-                                    <label className="space-y-1.5 col-span-2">
+                                    <label className="space-y-1.5 sm:col-span-2">
                                         <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">Message</span>
                                         <textarea
                                             name="message"
@@ -454,7 +454,7 @@ export default function CurrentStudents() {
                                         />
                                     </label>
 
-                                    <label className="space-y-2 col-span-2">
+                                    <label className="space-y-2 sm:col-span-2">
                                         <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">Message</span>
                                         <textarea
                                             name="message"
@@ -563,4 +563,3 @@ export default function CurrentStudents() {
         </WebLayout>
     )
 }
-

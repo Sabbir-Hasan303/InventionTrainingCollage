@@ -44,6 +44,10 @@ Route::get('/current-students', function () {
     return Inertia::render('Web/Current-Students');
 });
 
+Route::get('/enroll', function () {
+    return Inertia::render('Web/Enroll');
+});
+
 Route::get('/contact', function () {
     return Inertia::render('Web/Contact');
 });
@@ -56,4 +60,5 @@ Route::get('/contact', function () {
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
+
 

@@ -203,11 +203,11 @@ export default function Navbar() {
                         </Link>
                         <div className="hidden xl:block">
                             <Link
-                                href="/contact"
+                                href="/enroll"
                                 className="group relative inline-flex items-center gap-3 overflow-hidden rounded-2xl border border-[#d7b55a]/50 bg-[#131519]/92 py-1.5 pl-5 pr-1.5 text-[12px] font-semibold tracking-[0.16em] text-[#fff2c8] shadow-[0_10px_24px_rgba(0,0,0,0.34)] backdrop-blur-md transition-all duration-300 hover:-translate-y-[1px] hover:border-[#e6c777] hover:shadow-[0_14px_30px_rgba(0,0,0,0.4)]"
                             >
                                 <span className="absolute inset-0 bg-gradient-to-r from-[#d7b55a]/10 via-transparent to-[#d7b55a]/5 opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
-                                <span className="relative z-10">ENQUIRE NOW</span>
+                                <span className="relative z-10">ENROLL NOW</span>
                                 <span className="relative z-10 inline-flex h-8 w-8 items-center justify-center rounded-xl bg-[#d7b55a] text-[#1b1d20] shadow-[inset_0_-1px_0_rgba(0,0,0,0.22)] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:scale-105">
                                     <img src="/assets/images/arrow-right.png" alt="" className="h-3.5 w-3.5 object-contain" aria-hidden="true" />
                                 </span>
@@ -317,11 +317,11 @@ export default function Navbar() {
 
                             <div className="pt-6 mt-6 border-t border-white/10">
                                 <Link
-                                    href="/contact"
+                                    href="/enroll"
                                     onClick={closeMobileMenu}
                                     className="inline-flex h-11 w-full items-center justify-center rounded-full border border-[#4ECDC4]/50 bg-[#4ECDC4]/12 px-3 text-center text-[0.72rem] font-medium tracking-[0.16em] text-[#7DE5DD] transition-all duration-300 hover:border-[#7DE5DD] hover:bg-[#4ECDC4]/20 hover:text-white"
                                 >
-                                    ENQUIRE NOW
+                                    ENROLL NOW
                                 </Link>
                             </div>
                         </motion.div>
@@ -331,3 +331,4 @@ export default function Navbar() {
         </>
     );
 }
+
