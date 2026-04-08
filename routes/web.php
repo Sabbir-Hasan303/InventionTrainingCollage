@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Web\StudentFormsController;
 
 Route::get('/', function () {
     // return Inertia::render('Welcome', [
@@ -43,14 +44,18 @@ Route::get('/category/{category}', function (string $category) {
 Route::get('/current-students', function () {
     return Inertia::render('Web/Current-Students');
 });
+Route::post('/current-students/support', [StudentFormsController::class, 'submitSupport'])->name('web.current-students.support');
+Route::post('/current-students/feedback', [StudentFormsController::class, 'submitFeedback'])->name('web.current-students.feedback');
 
 Route::get('/enroll', function () {
     return Inertia::render('Web/Enroll');
 });
+Route::post('/enroll', [StudentFormsController::class, 'submitEnroll'])->name('web.enroll.submit');
 
 Route::get('/contact', function () {
     return Inertia::render('Web/Contact');
 });
+Route::post('/contact/enquiry', [StudentFormsController::class, 'submitEnquiry'])->name('web.contact.enquiry');
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

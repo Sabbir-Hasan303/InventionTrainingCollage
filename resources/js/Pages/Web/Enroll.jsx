@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Head } from '@inertiajs/react'
+import { Head, useForm } from '@inertiajs/react'
 import { ArrowRight, CheckCircle2, FileText, GraduationCap, Upload } from 'lucide-react'
 import WebLayout from '@/Layouts/WebLayout'
 import MenuDropdown from '@/Components/others_animation/MenuDropdown'
@@ -25,32 +25,71 @@ const initialForm = {
 }
 
 export default function Enroll() {
-    const [form, setForm] = useState(initialForm)
+    const { data, setData, post, processing, reset, errors } = useForm(initialForm)
     const [submitted, setSubmitted] = useState(false)
     const [fileInputKey, setFileInputKey] = useState(0)
-    const [subjectError, setSubjectError] = useState('')
+    const [clientErrors, setClientErrors] = useState({})
 
     const handleChange = (event) => {
         const { name, value } = event.target
-        setForm((prev) => ({ ...prev, [name]: value }))
+        setData(name, value)
+        setClientErrors((prev) => {
+            const next = { ...prev }
+            delete next[name]
+            return next
+        })
+        if (submitted) setSubmitted(false)
     }
 
     const handleFileChange = (event) => {
         const file = event.target.files?.[0] ?? null
-        setForm((prev) => ({ ...prev, document: file }))
+        setData('document', file)
+        setClientErrors((prev) => {
+            const next = { ...prev }
+            delete next.document
+            return next
+        })
+        if (submitted) setSubmitted(false)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (!form.subject_to_read) {
-            setSubjectError('Please select a subject.')
+        const nextErrors = {}
+
+        if (!data.name?.trim()) nextErrors.name = 'Name is required.'
+        if (!data.email?.trim()) nextErrors.email = 'Email is required.'
+        if (!data.phone?.trim()) nextErrors.phone = 'Phone is required.'
+        if (!data.subject_to_read?.trim()) nextErrors.subject_to_read = 'Subject is required.'
+        if (!data.career_goal_statement?.trim()) nextErrors.career_goal_statement = 'Career goal is required.'
+        if (!data.previous_study?.trim()) nextErrors.previous_study = 'Previous study is required.'
+        if (!data.document) nextErrors.document = 'Academic document is required.'
+
+        setClientErrors(nextErrors)
+
+        if (Object.keys(nextErrors).length > 0) {
+            setSubmitted(false)
             return
         }
-        setSubjectError('')
-        setSubmitted(true)
-        setForm(initialForm)
-        setFileInputKey((prev) => prev + 1)
+
+        post('/enroll', {
+            preserveScroll: true,
+            forceFormData: true,
+            onSuccess: () => {
+                setClientErrors({})
+                setSubmitted(true)
+                reset()
+                setFileInputKey((prev) => prev + 1)
+            },
+            onError: () => {
+                setSubmitted(false)
+            },
+        })
     }
+
+    const getFieldError = (field) => clientErrors[field] ?? errors[field]
+    const firstClientError = Object.values(clientErrors).find(Boolean)
+    const firstBackendError = Object.values(errors).find(Boolean)
+    const topError = firstClientError ?? firstBackendError
 
     const dropdownTheme = {
         label: 'text-[#4b5563]',
@@ -144,59 +183,82 @@ export default function Enroll() {
                                     Enrollment request submitted successfully. Our admissions team will contact you soon.
                                 </p>
                             )}
+                            {topError && (
+                                <p className="mb-5 rounded-lg border border-red-300/60 bg-red-50 px-3 py-2 text-sm text-red-700">
+                                    {topError}
+                                </p>
+                            )}
 
-                            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-x-5 gap-y-5 sm:grid-cols-2">
+                            <form onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-x-5 gap-y-5 sm:grid-cols-2">
                                 <label className="space-y-2 sm:col-span-1">
-                                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">Name</span>
+                                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
+                                        Name <span className="text-red-600">*</span>
+                                    </span>
                                     <input
                                         type="text"
                                         name="name"
-                                        value={form.name}
+                                        value={data.name}
                                         onChange={handleChange}
                                         required
                                         className="h-[50px] w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                         placeholder="Enter full name"
                                     />
+                                    {getFieldError('name') && <p className="text-xs text-red-600">{getFieldError('name')}</p>}
                                 </label>
 
                                 <label className="space-y-2 sm:col-span-1">
-                                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">Email</span>
+                                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
+                                        Email <span className="text-red-600">*</span>
+                                    </span>
                                     <input
                                         type="email"
                                         name="email"
-                                        value={form.email}
+                                        value={data.email}
                                         onChange={handleChange}
                                         required
                                         className="h-[50px] w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                         placeholder="name@example.com"
                                     />
+                                    {getFieldError('email') && <p className="text-xs text-red-600">{getFieldError('email')}</p>}
                                 </label>
 
                                 <label className="space-y-2 sm:col-span-1">
-                                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">Phone</span>
+                                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
+                                        Phone <span className="text-red-600">*</span>
+                                    </span>
                                     <input
                                         type="tel"
                                         name="phone"
-                                        value={form.phone}
+                                        value={data.phone}
                                         onChange={handleChange}
                                         required
                                         className="h-[50px] w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                         placeholder="Enter phone number"
                                     />
+                                    {getFieldError('phone') && <p className="text-xs text-red-600">{getFieldError('phone')}</p>}
                                 </label>
 
                                 <div className="space-y-2 sm:col-span-1">
-                                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">Subject</span>
+                                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
+                                        Subject <span className="text-red-600">*</span>
+                                    </span>
                                     <MenuDropdown
                                         id="enroll-subject"
                                         name="subject_to_read"
                                         label="Subject"
                                         placeholder="Select a subject"
                                         options={subjectOptions}
-                                        value={form.subject_to_read}
+                                        value={data.subject_to_read}
                                         onChange={(nextValue) => {
-                                            setForm((prev) => ({ ...prev, subject_to_read: nextValue }))
-                                            if (nextValue) setSubjectError('')
+                                            setData('subject_to_read', nextValue)
+                                            if (submitted) setSubmitted(false)
+                                            if (nextValue) {
+                                                setClientErrors((prev) => {
+                                                    const next = { ...prev }
+                                                    delete next.subject_to_read
+                                                    return next
+                                                })
+                                            }
                                         }}
                                         size="md"
                                         color="slate"
@@ -209,44 +271,54 @@ export default function Enroll() {
                                         menuClassName="rounded-xl p-1"
                                         optionClassName="rounded-lg"
                                     />
-                                    {subjectError && <p className="mt-2 text-xs text-red-600">{subjectError}</p>}
+                                    {getFieldError('subject_to_read') && (
+                                        <p className="mt-2 text-xs text-red-600">{getFieldError('subject_to_read')}</p>
+                                    )}
                                 </div>
 
                                 <label className="space-y-2 sm:col-span-2">
                                     <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
-                                        Career Goal
+                                        Career Goal <span className="text-red-600">*</span>
                                     </span>
                                     <textarea
                                         name="career_goal_statement"
-                                        value={form.career_goal_statement}
+                                        value={data.career_goal_statement}
                                         onChange={handleChange}
                                         required
                                         rows={5}
                                         className="w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 py-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                         placeholder="Describe your career path or career goals"
                                     />
+                                    {getFieldError('career_goal_statement') && (
+                                        <p className="text-xs text-red-600">{getFieldError('career_goal_statement')}</p>
+                                    )}
                                 </label>
 
                                 <label className="space-y-2 sm:col-span-1">
                                     <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
-                                        Previous Study (Last Read Class)
+                                        Previous Study (Last Read Class) <span className="text-red-600">*</span>
                                     </span>
                                     <input
                                         type="text"
                                         name="previous_study"
-                                        value={form.previous_study}
+                                        value={data.previous_study}
                                         onChange={handleChange}
                                         required
                                         className="h-[50px] w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                         placeholder="e.g. Year 12, Diploma, Bachelor"
                                     />
+                                    {getFieldError('previous_study') && (
+                                        <p className="text-xs text-red-600">{getFieldError('previous_study')}</p>
+                                    )}
                                 </label>
 
                                 <label className="space-y-2 sm:col-span-1">
-                                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">Academic Documents</span>
+                                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
+                                        Academic Documents <span className="text-red-600">*</span>
+                                    </span>
                                     <div className="flex h-[50px] cursor-pointer items-center gap-2 rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 text-sm text-[#111827]">
                                         <Upload className="h-4 w-4 text-[#6b7280]" />
-                                        <span className="truncate">{form.document ? form.document.name : 'Choose a file'}</span>
+                                        <span className="truncate">{data.document ? data.document.name : 'Choose a file'}</span>
                                         <input
                                             key={fileInputKey}
                                             type="file"
@@ -258,14 +330,18 @@ export default function Enroll() {
                                         />
                                     </div>
                                     <p className="text-xs text-[#6b7280]">Accepted: PDF, DOC, DOCX, JPG, JPEG, PNG</p>
+                                    {getFieldError('document') && (
+                                        <p className="text-xs text-red-600">{getFieldError('document')}</p>
+                                    )}
                                 </label>
 
                                 <div className="sm:col-span-2">
                                     <button
                                         type="submit"
+                                        disabled={processing}
                                         className="inline-flex items-center gap-2 rounded-xl bg-[#d7b55a] px-5 py-3 text-xs font-semibold uppercase tracking-[0.13em] text-[#1d1f22] transition hover:bg-[#e4c67a]"
                                     >
-                                        Submit Enrollment
+                                        {processing ? 'Submitting...' : 'Submit Enrollment'}
                                         <ArrowRight className="h-4 w-4" />
                                     </button>
                                 </div>

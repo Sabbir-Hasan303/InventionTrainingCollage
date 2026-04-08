@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Head, Link } from '@inertiajs/react'
+import { Head, Link, useForm } from '@inertiajs/react'
 import {
     ArrowRight,
     CheckCircle2,
@@ -75,10 +75,12 @@ const initialFeedbackForm = {
 }
 
 export default function CurrentStudents() {
-    const [supportForm, setSupportForm] = useState(initialSupportForm)
-    const [feedbackForm, setFeedbackForm] = useState(initialFeedbackForm)
+    const supportForm = useForm(initialSupportForm)
+    const feedbackForm = useForm(initialFeedbackForm)
     const [supportSubmitted, setSupportSubmitted] = useState(false)
     const [feedbackSubmitted, setFeedbackSubmitted] = useState(false)
+    const [supportClientErrors, setSupportClientErrors] = useState({})
+    const [feedbackClientErrors, setFeedbackClientErrors] = useState({})
 
     const scrollToForm = useCallback((targetId, syncHash = true) => {
         const target = document.getElementById(targetId)
@@ -123,25 +125,83 @@ export default function CurrentStudents() {
 
     const handleSupportChange = (event) => {
         const { name, value } = event.target
-        setSupportForm((prev) => ({ ...prev, [name]: value }))
+        supportForm.setData(name, value)
+        supportForm.clearErrors(name)
+        setSupportClientErrors((prev) => {
+            const next = { ...prev }
+            delete next[name]
+            return next
+        })
+        if (supportSubmitted) setSupportSubmitted(false)
     }
 
     const handleFeedbackChange = (event) => {
         const { name, value } = event.target
-        setFeedbackForm((prev) => ({ ...prev, [name]: value }))
+        feedbackForm.setData(name, value)
+        feedbackForm.clearErrors(name)
+        setFeedbackClientErrors((prev) => {
+            const next = { ...prev }
+            delete next[name]
+            return next
+        })
+        if (feedbackSubmitted) setFeedbackSubmitted(false)
     }
 
     const handleSupportSubmit = (event) => {
         event.preventDefault()
-        setSupportSubmitted(true)
-        setSupportForm(initialSupportForm)
+        const nextErrors = {}
+
+        if (!supportForm.data.fullName?.trim()) nextErrors.fullName = 'Full name is required.'
+        if (!supportForm.data.email?.trim()) nextErrors.email = 'Email is required.'
+        if (!supportForm.data.studentId?.trim()) nextErrors.studentId = 'Student ID is required.'
+        if (!supportForm.data.supportOption?.trim()) nextErrors.supportOption = 'Support option is required.'
+        if (!supportForm.data.message?.trim()) nextErrors.message = 'Message is required.'
+
+        setSupportClientErrors(nextErrors)
+        if (Object.keys(nextErrors).length > 0) {
+            setSupportSubmitted(false)
+            return
+        }
+
+        supportForm.post('/current-students/support', {
+            preserveScroll: true,
+            onSuccess: () => {
+                setSupportSubmitted(true)
+                setSupportClientErrors({})
+                supportForm.reset()
+            },
+        })
     }
 
     const handleFeedbackSubmit = (event) => {
         event.preventDefault()
-        setFeedbackSubmitted(true)
-        setFeedbackForm(initialFeedbackForm)
+        const nextErrors = {}
+
+        if (!feedbackForm.data.fullName?.trim()) nextErrors.fullName = 'Full name is required.'
+        if (!feedbackForm.data.email?.trim()) nextErrors.email = 'Email is required.'
+        if (!feedbackForm.data.subject?.trim()) nextErrors.subject = 'Subject is required.'
+        if (!feedbackForm.data.message?.trim()) nextErrors.message = 'Message is required.'
+
+        setFeedbackClientErrors(nextErrors)
+        if (Object.keys(nextErrors).length > 0) {
+            setFeedbackSubmitted(false)
+            return
+        }
+
+        feedbackForm.post('/current-students/feedback', {
+            preserveScroll: true,
+            onSuccess: () => {
+                setFeedbackSubmitted(true)
+                setFeedbackClientErrors({})
+                feedbackForm.reset()
+            },
+        })
     }
+
+    const getSupportFieldError = (field) => supportClientErrors[field] ?? supportForm.errors[field]
+    const getFeedbackFieldError = (field) => feedbackClientErrors[field] ?? feedbackForm.errors[field]
+    const supportTopError = Object.values(supportClientErrors).find(Boolean) ?? Object.values(supportForm.errors).find(Boolean)
+    const feedbackTopError = Object.values(feedbackClientErrors).find(Boolean) ?? Object.values(feedbackForm.errors).find(Boolean)
 
     return (
         <WebLayout>
@@ -255,37 +315,48 @@ export default function CurrentStudents() {
                                     Your IT support request has been recorded.
                                 </p>
                             )}
+                            {supportTopError && (
+                                <p className="mb-4 rounded-lg border border-red-300/60 bg-red-50 px-3 py-2 text-sm text-red-700">
+                                    {supportTopError}
+                                </p>
+                            )}
 
-                            <form onSubmit={handleSupportSubmit} className="space-y-4">
+                            <form onSubmit={handleSupportSubmit} noValidate className="space-y-4">
                                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <label className="space-y-1.5">
                                         <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
-                                            Full Name
+                                            Full Name <span className="text-red-600">*</span>
                                         </span>
                                         <input
                                             type="text"
                                             name="fullName"
-                                            value={supportForm.fullName}
+                                            value={supportForm.data.fullName}
                                             onChange={handleSupportChange}
                                             required
                                             className="w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 py-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                             placeholder="Enter full name"
                                         />
+                                        {getSupportFieldError('fullName') && (
+                                            <p className="text-xs text-red-600">{getSupportFieldError('fullName')}</p>
+                                        )}
                                     </label>
 
                                     <label className="space-y-1.5">
                                         <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
-                                            Email
+                                            Email <span className="text-red-600">*</span>
                                         </span>
                                         <input
                                             type="email"
                                             name="email"
-                                            value={supportForm.email}
+                                            value={supportForm.data.email}
                                             onChange={handleSupportChange}
                                             required
                                             className="w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 py-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                             placeholder="name@example.com"
                                         />
+                                        {getSupportFieldError('email') && (
+                                            <p className="text-xs text-red-600">{getSupportFieldError('email')}</p>
+                                        )}
                                     </label>
 
                                     <label className="space-y-1.5">
@@ -295,7 +366,7 @@ export default function CurrentStudents() {
                                         <input
                                             type="tel"
                                             name="phone"
-                                            value={supportForm.phone}
+                                            value={supportForm.data.phone}
                                             onChange={handleSupportChange}
                                             className="w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 py-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                             placeholder="Enter phone number"
@@ -304,28 +375,31 @@ export default function CurrentStudents() {
 
                                     <label className="space-y-1.5">
                                         <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
-                                            Student ID (Required)
+                                            Student ID <span className="text-red-600">*</span>
                                         </span>
                                         <input
                                             type="text"
                                             name="studentId"
-                                            value={supportForm.studentId}
+                                            value={supportForm.data.studentId}
                                             onChange={handleSupportChange}
                                             required
                                             className="w-full rounded-xl border border-[#d7b55a]/55 bg-[#fffaf0] px-3 py-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                             placeholder="Enter student ID"
                                         />
+                                        {getSupportFieldError('studentId') && (
+                                            <p className="text-xs text-red-600">{getSupportFieldError('studentId')}</p>
+                                        )}
                                     </label>
 
                                     <fieldset className="space-y-2 sm:col-span-2">
                                         <legend className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
-                                            Support Option
+                                            Support Option <span className="text-red-600">*</span>
                                         </legend>
                                         <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
                                             {supportOptions.map((option) => (
                                                 <label
                                                     key={option.value}
-                                                    className={`cursor-pointer rounded-xl border px-3 py-3 text-center text-xs font-semibold uppercase tracking-[0.12em] transition ${supportForm.supportOption === option.value
+                                                    className={`cursor-pointer rounded-xl border px-3 py-3 text-center text-xs font-semibold uppercase tracking-[0.12em] transition ${supportForm.data.supportOption === option.value
                                                         ? 'border-[#d7b55a] bg-[#fff6de] text-[#8a6b1f]'
                                                         : 'border-[#d1d5db] bg-[#f9fafb] text-[#4b5563] hover:border-[#9ca3af]'
                                                         }`}
@@ -334,7 +408,7 @@ export default function CurrentStudents() {
                                                         type="radio"
                                                         name="supportOption"
                                                         value={option.value}
-                                                        checked={supportForm.supportOption === option.value}
+                                                        checked={supportForm.data.supportOption === option.value}
                                                         onChange={handleSupportChange}
                                                         className="sr-only"
                                                     />
@@ -342,19 +416,27 @@ export default function CurrentStudents() {
                                                 </label>
                                             ))}
                                         </div>
+                                        {getSupportFieldError('supportOption') && (
+                                            <p className="text-xs text-red-600">{getSupportFieldError('supportOption')}</p>
+                                        )}
                                     </fieldset>
 
                                     <label className="space-y-1.5 sm:col-span-2">
-                                        <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">Message</span>
+                                        <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
+                                            Message <span className="text-red-600">*</span>
+                                        </span>
                                         <textarea
                                             name="message"
-                                            value={supportForm.message}
+                                            value={supportForm.data.message}
                                             onChange={handleSupportChange}
                                             required
                                             rows={5}
                                             className="w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 py-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                             placeholder="Describe your issue or support request"
                                         />
+                                        {getSupportFieldError('message') && (
+                                            <p className="text-xs text-red-600">{getSupportFieldError('message')}</p>
+                                        )}
                                     </label>
                                 </div>
 
@@ -362,9 +444,10 @@ export default function CurrentStudents() {
 
                                 <button
                                     type="submit"
+                                    disabled={supportForm.processing}
                                     className="inline-flex items-center gap-2 rounded-xl bg-[#d7b55a] px-5 py-3 text-xs font-semibold uppercase tracking-[0.13em] text-[#1d1f22] transition hover:bg-[#e4c67a]"
                                 >
-                                    Submit IT Support
+                                    {supportForm.processing ? 'Submitting...' : 'Submit IT Support'}
                                     <ArrowRight className="h-4 w-4" />
                                 </button>
                             </form>
@@ -392,37 +475,48 @@ export default function CurrentStudents() {
                                     Thank you, your feedback has been received.
                                 </p>
                             )}
+                            {feedbackTopError && (
+                                <p className="mb-4 rounded-lg border border-red-300/60 bg-red-50 px-3 py-2 text-sm text-red-700">
+                                    {feedbackTopError}
+                                </p>
+                            )}
 
-                            <form onSubmit={handleFeedbackSubmit} className="space-y-4">
+                            <form onSubmit={handleFeedbackSubmit} noValidate className="space-y-4">
                                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <label className="space-y-1.5">
                                         <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
-                                            Full Name
+                                            Full Name <span className="text-red-600">*</span>
                                         </span>
                                         <input
                                             type="text"
                                             name="fullName"
-                                            value={feedbackForm.fullName}
+                                            value={feedbackForm.data.fullName}
                                             onChange={handleFeedbackChange}
                                             required
                                             className="w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 py-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                             placeholder="Enter full name"
                                         />
+                                        {getFeedbackFieldError('fullName') && (
+                                            <p className="text-xs text-red-600">{getFeedbackFieldError('fullName')}</p>
+                                        )}
                                     </label>
 
                                     <label className="space-y-1.5">
                                         <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
-                                            Email
+                                            Email <span className="text-red-600">*</span>
                                         </span>
                                         <input
                                             type="email"
                                             name="email"
-                                            value={feedbackForm.email}
+                                            value={feedbackForm.data.email}
                                             onChange={handleFeedbackChange}
                                             required
                                             className="w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 py-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                             placeholder="name@example.com"
                                         />
+                                        {getFeedbackFieldError('email') && (
+                                            <p className="text-xs text-red-600">{getFeedbackFieldError('email')}</p>
+                                        )}
                                     </label>
 
                                     <label className="space-y-1.5">
@@ -432,7 +526,7 @@ export default function CurrentStudents() {
                                         <input
                                             type="tel"
                                             name="phone"
-                                            value={feedbackForm.phone}
+                                            value={feedbackForm.data.phone}
                                             onChange={handleFeedbackChange}
                                             className="w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 py-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                             placeholder="Enter phone number"
@@ -441,38 +535,47 @@ export default function CurrentStudents() {
 
                                     <label className="space-y-1.5">
                                         <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
-                                            Subject
+                                            Subject <span className="text-red-600">*</span>
                                         </span>
                                         <input
                                             type="text"
                                             name="subject"
-                                            value={feedbackForm.subject}
+                                            value={feedbackForm.data.subject}
                                             onChange={handleFeedbackChange}
                                             required
                                             className="w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 py-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                             placeholder="Subject"
                                         />
+                                        {getFeedbackFieldError('subject') && (
+                                            <p className="text-xs text-red-600">{getFeedbackFieldError('subject')}</p>
+                                        )}
                                     </label>
 
                                     <label className="space-y-2 sm:col-span-2">
-                                        <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">Message</span>
+                                        <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b5563]">
+                                            Message <span className="text-red-600">*</span>
+                                        </span>
                                         <textarea
                                             name="message"
-                                            value={feedbackForm.message}
+                                            value={feedbackForm.data.message}
                                             onChange={handleFeedbackChange}
                                             required
                                             rows={7}
                                             className="w-full rounded-xl border border-[#d1d5db] bg-[#f9fafb] px-3 py-3 text-sm text-[#111827] placeholder:text-[#6b7280]"
                                             placeholder="Share your experience, suggestion, or concern"
                                         />
+                                        {getFeedbackFieldError('message') && (
+                                            <p className="text-xs text-red-600">{getFeedbackFieldError('message')}</p>
+                                        )}
                                     </label>
                                 </div>
 
                                 <button
                                     type="submit"
+                                    disabled={feedbackForm.processing}
                                     className="inline-flex items-center gap-2 rounded-xl bg-[#4ecdc4] px-5 py-3 text-xs font-semibold uppercase tracking-[0.13em] text-[#10151f] transition hover:bg-[#68dbd3]"
                                 >
-                                    Submit Feedback
+                                    {feedbackForm.processing ? 'Submitting...' : 'Submit Feedback'}
                                     <ArrowRight className="h-4 w-4" />
                                 </button>
                             </form>
