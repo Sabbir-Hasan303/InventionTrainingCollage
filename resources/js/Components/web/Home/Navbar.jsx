@@ -17,7 +17,7 @@ const navItems = [
             { label: "Security", path: "/category/security" },
         ],
     },
-    { label: "Students", path: "/students" },
+    { label: "Current Students", path: "/current-students" },
     { label: "Contact", path: "/contact" },
 ];
 

@@ -40,8 +40,8 @@ Route::get('/category/{category}', function (string $category) {
     ]);
 });
 
-Route::get('/students', function () {
-    return Inertia::render('Web/ComingSoon');
+Route::get('/current-students', function () {
+    return Inertia::render('Web/Current-Students');
 });
 
 Route::get('/contact', function () {
@@ -56,3 +56,4 @@ Route::get('/contact', function () {
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
+
