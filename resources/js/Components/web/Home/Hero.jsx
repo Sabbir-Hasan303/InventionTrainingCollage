@@ -106,10 +106,10 @@ export default function Hero() {
                         </Link>
 
                         <Link
-                            href="/contact"
+                            href="/enroll"
                             className="rounded-full border border-white/35 px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-white/70 hover:bg-white/10"
                         >
-                            Enquire Now
+                            Enroll Now
                         </Link>
                     </div>
 
@@ -123,3 +123,4 @@ export default function Hero() {
         </section>
     )
 }
+

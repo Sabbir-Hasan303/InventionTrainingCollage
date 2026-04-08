@@ -51,13 +51,23 @@ export default function ITCFooter() {
                             </p>
                         </div>
 
-                        <Link
-                            href="/contact"
-                            className="group inline-flex items-center gap-2 self-start rounded-2xl border border-[#d7b55a]/55 bg-[#d7b55a]/12 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#ffe8af] transition-all duration-300 hover:border-[#e7c877] hover:bg-[#d7b55a]/20"
-                        >
-                            Talk to Admissions
-                            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                        </Link>
+                        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+                            <Link
+                                href="/enroll"
+                                className="group inline-flex items-center gap-2 rounded-2xl bg-[#d7b55a] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#1d1f22] transition-all duration-300 hover:bg-[#e7c877]"
+                            >
+                                Enroll Now
+                                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                            </Link>
+
+                            <Link
+                                href="/contact"
+                                className="group inline-flex items-center gap-2 rounded-2xl border border-[#d7b55a]/55 bg-[#d7b55a]/12 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#ffe8af] transition-all duration-300 hover:border-[#e7c877] hover:bg-[#d7b55a]/20"
+                            >
+                                Talk to Admissions
+                                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
